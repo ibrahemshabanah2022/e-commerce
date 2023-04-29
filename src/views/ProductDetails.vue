@@ -86,7 +86,7 @@ export default {
   },
   mounted() {
     const id = this.$route.params.id;
-    fetch(`https://api.escuelajs.co/api/v1/products/${id}`)
+    fetch(`http://localhost:8000/api/products/${id}`)
       .then((response) => response.json())
       .then((d) => {
         this.product = d;

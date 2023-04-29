@@ -319,7 +319,7 @@ export default {
 
     const fetchProducts = async () => {
       const response = await fetch(
-        "https://api.escuelajs.co/api/v1/products?offset=0&limit=12"
+        "http://localhost:8000/api/products?offset=0&limit=12"
       );
       const data = await response.json();
       products.value = data;
