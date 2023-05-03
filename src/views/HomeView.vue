@@ -326,27 +326,27 @@ export default {
     };
 
     const fetchCategories = async () => {
-      const response = await fetch(
-        "https://api.escuelajs.co/api/v1/categories"
-      );
+      const response = await fetch("http://localhost:8000/api/category");
       const data = await response.json();
       categories.value = data;
     };
 
     const filterProducts = async (categoryId) => {
-      const response = await fetch(
-        `https://api.escuelajs.co/api/v1/categories/${categoryId}/products?offset=0&limit=12`
-      );
+      const response = await fetch(`http://localhost:8000/api/products`);
       const data = await response.json();
-      products.value = data;
+      const filteredProducts = data.filter(
+        (product) => product.category_id === categoryId
+      );
+      products.value = filteredProducts;
     };
 
     const searchProducts = async () => {
-      const response = await fetch(
-        `https://api.escuelajs.co/api/v1/products?title=${searchTerm.value}`
-      );
+      const response = await fetch(`http://localhost:8000/api/products`);
       const data = await response.json();
-      products.value = data;
+      const filteredProduct = data.filter(
+        (product) => product.title === searchTerm.value
+      );
+      products.value = filteredProduct;
     };
 
     const viewProduct = (productId) => {

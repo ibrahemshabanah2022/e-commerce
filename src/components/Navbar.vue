@@ -21,8 +21,17 @@
               My Account
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-              <button class="dropdown-item" type="button">Sign in</button>
-              <button class="dropdown-item" type="button">Sign up</button>
+              <router-link to="/login">
+                <button class="dropdown-item" type="button">Sign in</button>
+              </router-link>
+
+              <router-link to="/register">
+                <button class="dropdown-item" type="button">Sign up</button>
+              </router-link>
+
+              <router-link to="/logout">
+                <button class="dropdown-item" type="button">logout</button>
+              </router-link>
             </div>
           </div>
           <div class="btn-group mx-2">

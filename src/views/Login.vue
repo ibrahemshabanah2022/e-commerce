@@ -1,22 +1,13 @@
 <template>
   <div class="d-flex justify-content-center">
-    <form @submit.prevent="registerUser">
+    <form @submit.prevent="submitForm">
       <div class="form-group">
-        <label for="name">Name</label>
+        <label for="exampleInputEmail1">Email address</label>
         <input
-          type="text"
-          class="form-control"
-          v-model="name"
-          placeholder="name"
-        />
-      </div>
-      <div class="form-group">
-        <label for="email">Email address</label>
-        <input
+          v-model="email"
           type="email"
           class="form-control"
-          v-model="email"
-          id="email"
+          id="exampleInputEmail1"
           aria-describedby="emailHelp"
           placeholder="Enter email"
         />
@@ -25,16 +16,24 @@
         >
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="exampleInputPassword1">Password</label>
         <input
+          v-model="password"
           type="password"
           class="form-control"
-          v-model="password"
-          id="password"
+          id="exampleInputPassword1"
           placeholder="Password"
         />
       </div>
-
+      <div class="form-group form-check">
+        <input
+          v-model="rememberMe"
+          type="checkbox"
+          class="form-check-input"
+          id="exampleCheck1"
+        />
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
@@ -44,23 +43,23 @@
 export default {
   data() {
     return {
-      name: "",
       email: "",
       password: "",
+      rememberMe: false,
     };
   },
   methods: {
-    async registerUser() {
+    async submitForm() {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/signup", {
+        const response = await fetch("http://127.0.0.1:8000/api/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name: this.name,
             email: this.email,
             password: this.password,
+            rememberMe: this.rememberMe,
           }),
         });
         const data = await response.json();
@@ -72,3 +71,5 @@ export default {
   },
 };
 </script>
+
+<style></style>
