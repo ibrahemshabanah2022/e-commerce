@@ -241,11 +241,14 @@
                       class="product-img position-relative overflow-hidden aspect-ratio aspect-ratio-1x1"
                     >
                       <img class="card-img-top" :src="product.images" alt="" />
+
                       <div class="product-action">
+                        <!-- <button @click="addToCart(product)">Add to Cart</button> -->
+
                         <a
                           v-on:click="showSwal(product)"
                           class="btn btn-outline-dark btn-square"
-                          @click="saveProduct(product)"
+                          @click="addToCart(product)"
                           ><i class="fa fa-shopping-cart"></i
                         ></a>
                         <a class="btn btn-outline-dark btn-square" href=""
@@ -253,7 +256,7 @@
                         ></a>
                         <a
                           class="btn btn-outline-dark btn-square"
-                          @click="viewProduct(product.id)"
+                          @click="viewProduct(product.id, product)"
                           ><i class="fa fa-eye"></i
                         ></a>
                       </div>
@@ -369,6 +372,79 @@ export default {
   },
 
   methods: {
+    addToCart(product) {
+      const userToken = localStorage.getItem("userToken");
+
+      if (!userToken) {
+        window.location.href = "/login"; // Replace with the URL of your login page
+        return;
+      } else {
+        let products = JSON.parse(localStorage.getItem("product")) || [];
+
+        // Check if the product is already in the cart
+        const productIndex = products.findIndex((p) => p.id === product.id);
+
+        if (productIndex === -1) {
+          // If the product is not in the cart, add it to the array
+          products.push(product);
+
+          // Save the updated array to local storage
+          localStorage.setItem("product", JSON.stringify(products));
+        } else {
+          // If the product is already in the cart, do nothing
+          alert("Product already in cart");
+        }
+        //********************************************
+        // const userToken = localStorage.getItem("userToken");
+
+        fetch("http://127.0.0.1:8000/api/cart/addproduct", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+          body: JSON.stringify({
+            product_id: product.id,
+            // cart_id: 1,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      }
+    },
+
+    // addProduct(productId) {
+    //   // Get the cart ID from session
+    //   const cartId = sessionStorage.getItem("cart_id");
+    //   console.log(cartId);
+    //   // Define the data to be sent to the Laravel function
+    //   const data = {
+    //     cart_id: cartId,
+    //     product_id: productId,
+    //   };
+
+    //   // Make an HTTP request to the Laravel API endpoint
+    //   fetch("http://127.0.0.1:8000/api/cart/addproduct", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(data),
+    //   })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //     });
+    // },
+
     showSwal(product) {
       let productt = JSON.parse(localStorage.getItem("product")) || [];
       const tIndex = productt.findIndex((p) => p.id === product.id);
