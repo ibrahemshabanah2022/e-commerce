@@ -55,6 +55,7 @@
               </td>
               <td class="align-middle">
                 <button
+                  v-on:click="showSwal(product)"
                   @click="removeProduct(product.id)"
                   class="btn btn-sm btn-danger"
                 >
@@ -183,7 +184,6 @@ export default {
         localStorage.setItem("product", JSON.stringify(this.savedProducts));
       }
     },
-
     removeProduct(productId) {
       // Remove the product from the cartItems array
       this.cartItems = this.cartItems.filter((item) => item.id !== productId);
@@ -198,6 +198,18 @@ export default {
 
       // Recalculate the total price
       this.totalPrice = this.calculateTotalPrice(this.savedProducts);
+
+      // Update the cart count
+      // this.showSwal({ id: productId });
+    },
+    showSwal(product) {
+      let productt = JSON.parse(localStorage.getItem("product")) || [];
+      const tIndex = productt.findIndex((p) => p.id === product.id);
+      if (tIndex === -1) {
+        this.$store.commit("decreaseCartCount", 0);
+      } else {
+        this.$store.commit("decreaseCartCount", 1);
+      }
     },
   },
 
