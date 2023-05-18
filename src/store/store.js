@@ -13,6 +13,9 @@ const store = createStore({
     updateCartCount(state, val) {
       state.cartCount += val;
     },
+    decreaseCartCount(state, val) {
+      state.cartCount -= val;
+    },
   },
 });
 
