@@ -24,7 +24,15 @@
               <router-link to="/login">
                 <button class="dropdown-item" type="button">Sign in</button>
               </router-link>
-
+              <router-link to="/login">
+                <button class="dropdown-item" type="button">Sign in</button>
+              </router-link>
+              <router-link to="/login">
+                <button class="dropdown-item" type="button">Sign in</button>
+              </router-link>
+              <router-link to="/login">
+                <button class="dropdown-item" type="button">Sign in</button>
+              </router-link>
               <router-link to="/register">
                 <button class="dropdown-item" type="button">Sign up</button>
               </router-link>
