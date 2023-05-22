@@ -251,7 +251,9 @@
                           @click="addToCart(product)"
                           ><i class="fa fa-shopping-cart"></i
                         ></a>
-                        <a class="btn btn-outline-dark btn-square" href=""
+                        <a
+                          class="btn btn-outline-dark btn-square"
+                          @click="addToWishlist(product.id)"
                           ><i class="far fa-heart"></i
                         ></a>
                         <a
@@ -372,11 +374,41 @@ export default {
   },
 
   methods: {
+    addToWishlist(productId) {
+      const userToken = localStorage.getItem("userToken");
+
+      fetch("http://127.0.0.1:8000/api/wishlists", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify({
+          product_id: productId,
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to add product to wishlist");
+          } else {
+            alert("product added succssefuly to wishlist");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          // Handle the response data here
+        })
+        .catch((error) => {
+          console.error(error);
+          this.error = "Failed to add product to wishlist";
+        });
+    },
     addToCart(product) {
       const userToken = localStorage.getItem("userToken");
 
       if (!userToken) {
-        window.location.href = "/login"; // Replace with the URL of your login page
+        window.location.href = "/login";
         return;
       } else {
         let products = JSON.parse(localStorage.getItem("product")) || [];
