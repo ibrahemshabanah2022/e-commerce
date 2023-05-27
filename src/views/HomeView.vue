@@ -251,7 +251,9 @@
                           @click="addToCart(product)"
                           ><i class="fa fa-shopping-cart"></i
                         ></a>
-                        <a class="btn btn-outline-dark btn-square" href=""
+                        <a
+                          class="btn btn-outline-dark btn-square"
+                          @click="addToWishlist(product)"
                           ><i class="far fa-heart"></i
                         ></a>
                         <a
@@ -352,10 +354,6 @@ export default {
       products.value = filteredProduct;
     };
 
-    const viewProduct = (productId) => {
-      // Do something to view the product
-    };
-
     onMounted(() => {
       fetchProducts();
       fetchCategories();
@@ -372,11 +370,63 @@ export default {
   },
 
   methods: {
+    addToWishlist(product) {
+      const userToken = localStorage.getItem("userToken");
+      if (!userToken) {
+        window.location.href = "/login";
+        return;
+      } else {
+        let products =
+          JSON.parse(localStorage.getItem("wishlistProducts")) || [];
+
+        // Check if the product is already in the cart
+        const productIndex = products.findIndex((p) => p.id === product.id);
+
+        if (productIndex === -1) {
+          // If the product is not in the cart, add it to the array
+          products.push(product);
+
+          // Save the updated array to local storage
+          localStorage.setItem("wishlistProducts", JSON.stringify(products));
+          alert("Product added to wishlist");
+        } else {
+          // If the product is already in the cart, do nothing
+          alert("Product already in wishlist");
+        }
+
+        fetch("http://127.0.0.1:8000/api/wishlists", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+          body: JSON.stringify({
+            product_id: product.id,
+          }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to add product to wishlist");
+            } else {
+              // alert("product added succssefuly to wishlist");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            // Handle the response data here
+          })
+          .catch((error) => {
+            console.error(error);
+            this.error = "Failed to add product to wishlist";
+          });
+      }
+    },
     addToCart(product) {
       const userToken = localStorage.getItem("userToken");
 
       if (!userToken) {
-        window.location.href = "/login"; // Replace with the URL of your login page
+        window.location.href = "/login";
         return;
       } else {
         let products = JSON.parse(localStorage.getItem("product")) || [];
@@ -418,33 +468,6 @@ export default {
       }
     },
 
-    // addProduct(productId) {
-    //   // Get the cart ID from session
-    //   const cartId = sessionStorage.getItem("cart_id");
-    //   console.log(cartId);
-    //   // Define the data to be sent to the Laravel function
-    //   const data = {
-    //     cart_id: cartId,
-    //     product_id: productId,
-    //   };
-
-    //   // Make an HTTP request to the Laravel API endpoint
-    //   fetch("http://127.0.0.1:8000/api/cart/addproduct", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(data),
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //     });
-    // },
-
     showSwal(product) {
       let productt = JSON.parse(localStorage.getItem("product")) || [];
       const tIndex = productt.findIndex((p) => p.id === product.id);
@@ -473,37 +496,12 @@ export default {
         alert("Product already in cart");
       }
     },
-    // saveProduct(product) {
-    //   // Get existing products from local storage or create an empty array
-    //   let products = JSON.parse(localStorage.getItem("product")) || [];
 
-    //   // Add the new product to the array
-    //   products.push(product);
-
-    //   // Save the updated array to local storage
-    //   localStorage.setItem("product", JSON.stringify(products));
-    // },
     viewProduct(id) {
       this.$router.push(`/products/${id}`);
     },
   },
 };
-// export default {
-//   data() {
-//     return {
-//       products: [],
-//       loading: true,
-//     };
-//   },
-//   async created() {
-//     const response = await fetch(
-//       "https://api.escuelajs.co/api/v1/products?offset=0&limit=10"
-//     );
-//     const data = await response.json();
-//     this.products = data;
-//     this.loading = false;
-//   },
-// };
 </script>
 <style>
 .product-img img {
