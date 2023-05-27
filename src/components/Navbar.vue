@@ -24,15 +24,7 @@
               <router-link to="/login">
                 <button class="dropdown-item" type="button">Sign in</button>
               </router-link>
-              <router-link to="/login">
-                <button class="dropdown-item" type="button">Sign in</button>
-              </router-link>
-              <router-link to="/login">
-                <button class="dropdown-item" type="button">Sign in</button>
-              </router-link>
-              <router-link to="/login">
-                <button class="dropdown-item" type="button">Sign in</button>
-              </router-link>
+
               <router-link to="/register">
                 <button class="dropdown-item" type="button">Sign up</button>
               </router-link>
@@ -176,13 +168,10 @@
               <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-              <a href="" class="btn px-0">
-                <i class="fas fa-heart text-primary"></i>
-                <span
-                  class="badge text-secondary border border-secondary rounded-circle"
-                  style="padding-bottom: 2px"
-                  >0</span
-                > </a
+              <router-link to="/Wishlist">
+                <a href="" class="btn px-0">
+                  <i class="fas fa-heart text-primary"></i>
+                </a> </router-link
               ><router-link to="/cart">
                 <a class="btn px-0 ml-3">
                   <i
