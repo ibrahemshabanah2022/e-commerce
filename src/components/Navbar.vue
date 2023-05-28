@@ -21,17 +21,27 @@
               My Account
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-              <router-link to="/login">
-                <button class="dropdown-item" type="button">Sign in</button>
-              </router-link>
+              <div v-if="hasUserToken2">
+                <router-link to="/login">
+                  <button class="dropdown-item" type="button">Sign in</button>
+                </router-link>
 
-              <router-link to="/register">
-                <button class="dropdown-item" type="button">Sign up</button>
-              </router-link>
+                <router-link to="/register">
+                  <button class="dropdown-item" type="button">Sign up</button>
+                </router-link>
+              </div>
 
-              <router-link to="/logout">
-                <button class="dropdown-item" type="button">logout</button>
-              </router-link>
+              <div v-if="hasUserToken">
+                <router-link to="/MyProfile">
+                  <button class="dropdown-item" type="button">
+                    My Profile
+                  </button>
+                </router-link>
+
+                <button class="dropdown-item" type="button" @click="logout">
+                  logout
+                </button>
+              </div>
             </div>
           </div>
           <div class="btn-group mx-2">
@@ -208,5 +218,22 @@
   <!-- Navbar End -->
 </template>
 <script>
-export default {};
+export default {
+  methods: {
+    logout() {
+      // Remove the userToken from localStorage
+      localStorage.removeItem("userToken");
+      // Redirect the user to the login page
+      this.$router.push("/login");
+    },
+  },
+  computed: {
+    hasUserToken() {
+      return localStorage.getItem("userToken") !== null;
+    },
+    hasUserToken2() {
+      return localStorage.getItem("userToken") == null;
+    },
+  },
+};
 </script>
