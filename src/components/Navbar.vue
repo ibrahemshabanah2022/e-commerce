@@ -191,7 +191,7 @@
                   <span
                     class="badge text-secondary border border-secondary rounded-circle"
                     style="padding-bottom: 2px"
-                    >{{ $store.state.cartCount }}</span
+                    >{{ cartCount }}</span
                   >
                 </a>
               </router-link>
@@ -262,6 +262,14 @@ export default {
     // },
   },
   computed: {
+    cartCount() {
+      const userToken = localStorage.getItem("userToken");
+      if (userToken) {
+        return this.$store.state.cartCount;
+      } else {
+        return 0;
+      }
+    },
     hasUserToken() {
       return localStorage.getItem("userToken") !== null;
     },
