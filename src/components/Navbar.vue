@@ -178,11 +178,11 @@
               <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-              <router-link to="/Wishlist">
-                <a href="" class="btn px-0">
+              <router-link @click="authCheck()" to="/Wishlist">
+                <a class="btn px-0">
                   <i class="fas fa-heart text-primary"></i>
                 </a> </router-link
-              ><router-link to="/cart">
+              ><router-link @click="authCheck()" to="/cart">
                 <a class="btn px-0 ml-3">
                   <i
                     class="fas fa-shopping-cart text-primary"
@@ -220,12 +220,46 @@
 <script>
 export default {
   methods: {
+    //check if user loged in show wishlist and if not , log in first
+    authCheck() {
+      const userToken = localStorage.getItem("userToken");
+
+      if (!userToken) {
+        window.location.href = "/login";
+        return;
+      }
+    },
+
     logout() {
+      const token = localStorage.getItem("token");
+
+      fetch("http://127.0.0.1:8000/api/logout", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          // Perform any additional actions after logout, such as redirecting the user
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
       // Remove the userToken from localStorage
       localStorage.removeItem("userToken");
       // Redirect the user to the login page
-      this.$router.push("/login");
+      window.location.reload();
     },
+
+    // logout() {
+    //   // Remove the userToken from localStorage
+    //   localStorage.removeItem("userToken");
+    //   // Redirect the user to the login page
+    //   window.location.reload();
+    // },
   },
   computed: {
     hasUserToken() {
