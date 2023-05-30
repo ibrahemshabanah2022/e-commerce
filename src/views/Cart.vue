@@ -147,6 +147,31 @@ export default {
         localStorage.setItem("product", JSON.stringify(this.savedProducts));
       }
     },
+    // Remove a product from the cart
+    //  removeProduct(productId) {
+    //   fetch('http://127.0.0.1:8000/api/cart/deleteproduct', {
+    //     method: 'DELETE',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       cart_product_id: productId
+    //     })
+    //   })
+    //  .then(response => {
+    //     if (response.ok) {
+    //       // Product was removed from the cart
+    //       console.log('Product removed from cart');
+    //     } else {
+    //       // Error removing product from the cart
+    //       console.log('Error removing product from cart');
+    //     }
+    //   })
+    //  .catch(error => {
+    //     // Error removing product from the cart
+    //     console.log('Error removing product from cart:', error);
+    //   });
+    // },
     removeProduct(productId) {
       // Remove the product from the cartItems array
       this.cartItems = this.cartItems.filter((item) => item.id !== productId);
@@ -164,6 +189,31 @@ export default {
 
       // Update the cart count
       // this.showSwal({ id: productId });
+      const userToken = localStorage.getItem("userToken");
+
+      fetch("http://127.0.0.1:8000/api/cart/deleteproduct", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify({
+          cart_product_id: productId,
+        }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Product was removed from the cart
+            console.log("Product removed from cart");
+          } else {
+            // Error removing product from the cart
+            console.log("Error removing product from cart");
+          }
+        })
+        .catch((error) => {
+          // Error removing product from the cart
+          console.log("Error removing product from cart:", error);
+        });
     },
     showSwal(product) {
       let productt = JSON.parse(localStorage.getItem("product")) || [];
