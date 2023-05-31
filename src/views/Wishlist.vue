@@ -20,7 +20,11 @@
 
                 <div class="product-action">
                   <!-- <button @click="addToCart(product)">Add to Cart</button> -->
-
+                  <a
+                    @click="removeWishlistProduct(product.id)"
+                    class="btn btn-outline-dark btn-square"
+                    ><i class="fa fa-trash"></i
+                  ></a>
                   <a
                     v-on:click="showSwal(product)"
                     class="btn btn-outline-dark btn-square"
@@ -72,6 +76,46 @@ export default {
     window.removeEventListener("storage", this.updateWishlistProducts);
   },
   methods: {
+    removeWishlistProduct(productId) {
+      // Remove the product from the wishlistProducts array
+      this.wishlistProducts = this.wishlistProducts.filter(
+        (item) => item.id !== productId
+      );
+
+      // Update the local storage with the new wishlistProducts array
+      localStorage.setItem(
+        "wishlistProducts",
+        JSON.stringify(this.wishlistProducts)
+      );
+
+      // 88888888888888888888888888888888888888888888
+      const userToken = localStorage.getItem("userToken");
+
+      fetch("http://127.0.0.1:8000/api/destroy", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify({
+          product_id: productId,
+        }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Product was removed from the cart
+            console.log("Product removed from wishlist");
+          } else {
+            // Error removing product from the cart
+            console.log("Error removing product from wishlist");
+          }
+        })
+        .catch((error) => {
+          // Error removing product from the cart
+          console.log("Error removing product from wishlist:", error);
+        });
+    },
+
     updateWishlistProducts(event) {
       if (event.key === "wishlistProducts") {
         this.wishlistProducts = JSON.parse(event.newValue) || [];
