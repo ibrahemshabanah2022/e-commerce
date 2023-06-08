@@ -5,12 +5,30 @@ import Cart from "../views/Cart.vue";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 import MyProfile from "../views/MyProfile.vue";
-
+import Products from "../views/dashboard/html/Products.vue";
+import AdminProductDetails from "../views/dashboard/html/AdminProductDetails.vue";
 import Wishlist from "../views/Wishlist.vue";
+import EditProduct from "../views/dashboard/html/EditProduct.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: "/EditProduct/:id",
+      name: "EditProduct",
+      component: EditProduct,
+    },
+    {
+      path: "/Products",
+      name: "Products",
+      component: Products,
+    },
+    {
+      path: "/AdminProductDetails/:id",
+      name: "AdminProductDetails",
+      component: AdminProductDetails,
+    },
+    /////////////////////////////////////
     {
       path: "/MyProfile",
       name: "MyProfile",

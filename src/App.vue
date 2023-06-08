@@ -2,15 +2,11 @@
 import { RouterLink, RouterView } from "vue-router";
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
-import store from './store/store'
-
+import store from "./store/store";
 </script>
 
 <template>
-  <Navbar />
-
   <RouterView />
-  <Footer />
 </template>
 
 <style scoped>
