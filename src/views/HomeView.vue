@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <!-- Carousel Start -->
   <div class="container-fluid mb-3">
     <div class="row px-xl-5">
@@ -312,11 +313,17 @@
     </div>
   </div>
   <!-- Offer End -->
+  <Footer />
 </template>
 <script>
 import { ref, onMounted } from "vue";
-
+import Navbar from "../components/Navbar.vue";
+import Footer from "../components/Footer.vue";
 export default {
+  components: {
+    Navbar,
+    Footer,
+  },
   setup() {
     const products = ref([]);
     const categories = ref([]);

@@ -1,4 +1,6 @@
 <template>
+  <Navbar />
+
   <!-- Shop Detail Start -->
   <div class="container-fluid pb-5">
     <div class="row px-xl-5">
@@ -75,10 +77,17 @@
     </div>
   </div>
   <!-- Shop Detail End -->
+  <Footer />
 </template>
 
 <script>
+import Navbar from "../components/Navbar.vue";
+import Footer from "../components/Footer.vue";
 export default {
+  components: {
+    Navbar,
+    Footer,
+  },
   data() {
     return {
       product: {},

@@ -1,4 +1,6 @@
 <template>
+  <Navbar />
+
   <div>
     <h2>My Wishlist</h2>
   </div>
@@ -55,12 +57,19 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import { ref, onMounted } from "vue";
+import Navbar from "../components/Navbar.vue";
+import Footer from "../components/Footer.vue";
 
 export default {
+  components: {
+    Navbar,
+    Footer,
+  },
   data() {
     return {
       wishlistProducts:

@@ -1,5 +1,6 @@
 <template>
   <!-- Cart Start -->
+  <Navbar />
   <div class="container-fluid">
     <div class="row px-xl-5">
       <div class="col-lg-8 table-responsive mb-5">
@@ -96,10 +97,17 @@
       </div>
     </div>
   </div>
+  <Footer />
   <!-- Cart End -->
 </template>
 <script>
+import Navbar from "../components/Navbar.vue";
+import Footer from "../components/Footer.vue";
 export default {
+  components: {
+    Navbar,
+    Footer,
+  },
   data() {
     return {
       savedProducts: [],

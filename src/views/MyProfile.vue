@@ -1,9 +1,11 @@
 <template>
+  <Navbar />
+
   <div class="container light-style flex-grow-1 container-p-y">
     <h4 class="font-weight-bold py-3 mb-4">Account settings</h4>
 
-    <div class="card overflow-hidden">
-      <div class="row no-gutters row-bordered row-border-light">
+    <div class="overflow-hidden">
+      <div class="row no-gutters row-bordered row-border-light w-100">
         <div class="col-md-3 pt-0">
           <div class="list-group list-group-flush account-settings-links">
             <a
@@ -111,9 +113,16 @@
       >&nbsp;
     </div>
   </div>
+  <Footer />
 </template>
 <script>
+import Navbar from "../components/Navbar.vue";
+import Footer from "../components/Footer.vue";
 export default {
+  components: {
+    Navbar,
+    Footer,
+  },
   data() {
     return {
       userId: null,
