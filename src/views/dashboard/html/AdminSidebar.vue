@@ -31,11 +31,15 @@
                     </li>
                 </RouterLink>
                     <hr>
+                    <RouterLink to="/AddProduct">
+
                     <li class="nav-link">
                         <a href="#">
                             <span class="text nav-text">ADD NEW  PRODUCT</span>
                         </a>
                     </li>
+                </RouterLink>
+
                     <hr>
                     <li class="nav-link">
                         <a href="#">

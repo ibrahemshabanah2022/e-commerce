@@ -1,9 +1,10 @@
 <template>
   <Navbar />
+
   <!-- Carousel Start -->
   <div class="container-fluid mb-3">
     <div class="row px-xl-5">
-      <!-- <div class="col-lg-8">
+      <div class="col-lg-8">
         <div
           id="header-carousel"
           class="carousel slide carousel-fade mb-30 mb-lg-0"
@@ -105,8 +106,9 @@
             </div>
           </div>
         </div>
-      </div> -->
-      <!-- <div class="col-lg-4">
+      </div>
+
+      <div class="col-lg-4">
         <div class="product-offer mb-30" style="height: 200px">
           <img class="img-fluid" src="img/offer-1.jpg" alt="" />
           <div class="offer-text">
@@ -123,7 +125,7 @@
             <a href="" class="btn btn-primary">Shop Now</a>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
   <!-- Carousel End -->
@@ -241,7 +243,11 @@
                     <div
                       class="product-img position-relative overflow-hidden aspect-ratio aspect-ratio-1x1"
                     >
-                      <img class="card-img-top" :src="product.images" alt="" />
+                      <img
+                        class="card-img-top"
+                        :src="`http://localhost:8000/${product.image}`"
+                        alt=""
+                      />
 
                       <div class="product-action">
                         <!-- <button @click="addToCart(product)">Add to Cart</button> -->
