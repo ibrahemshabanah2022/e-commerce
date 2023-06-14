@@ -31,7 +31,8 @@
           >
             <tr>
               <td class="align-middle">
-                <img :src="product.images" alt="" style="width: 50px" />
+                
+                <img :src="`http://localhost:8000/${product.image}`" alt="" style="width: 50px" />
               </td>
               <td>{{ product.title }}</td>
               <td class="align-middle">{{ product.price }}$</td>
@@ -133,7 +134,7 @@ export default {
   mounted() {
     const userToken = localStorage.getItem("userToken");
 
-    fetch(        "http://localhost:8000/api/adminproducts?offset=0&limit=12", {
+    fetch(        "http://localhost:8000/api/adminproducts", {
         headers: {
     Authorization: `Bearer ${userToken}`
   }

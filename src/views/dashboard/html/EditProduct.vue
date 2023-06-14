@@ -19,7 +19,8 @@
 <h3>Product Description</h3>
 <textarea class="form-control" rows="6" v-model="product.description"></textarea>
 </div>
-<button type="submit">Update</button>
+<br>
+<button class="btn btn-dark" type="submit">Update</button>
 
 </form>
 </div>
