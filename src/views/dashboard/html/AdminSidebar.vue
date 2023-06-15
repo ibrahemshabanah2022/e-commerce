@@ -47,11 +47,13 @@
                         </a>
                     </li>
                     <hr>
+                    <router-link to="/AddCategory">
                     <li class="nav-link">
                         <a href="#">
                             <span class="text nav-text">ADD NEW CATEGORY</span>
                         </a>
                     </li>
+                </router-link>
                     <hr>
                     <li class="nav-link">
                         <a href="#">
