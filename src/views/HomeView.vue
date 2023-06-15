@@ -1,6 +1,5 @@
 <template>
   <Navbar />
-
   <!-- Carousel Start -->
   <div class="container-fluid mb-3">
     <div class="row px-xl-5">
@@ -42,11 +41,6 @@
                     Lorem rebum magna amet lorem magna erat diam stet. Sadips
                     duo stet amet amet ndiam elitr ipsum diam
                   </p>
-                  <a
-                    class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                    href="#"
-                    >Shop Now</a
-                  >
                 </div>
               </div>
             </div>
@@ -69,11 +63,6 @@
                     Lorem rebum magna amet lorem magna erat diam stet. Sadips
                     duo stet amet amet ndiam elitr ipsum diam
                   </p>
-                  <a
-                    class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                    href="#"
-                    >Shop Now</a
-                  >
                 </div>
               </div>
             </div>
@@ -96,11 +85,6 @@
                     Lorem rebum magna amet lorem magna erat diam stet. Sadips
                     duo stet amet amet ndiam elitr ipsum diam
                   </p>
-                  <a
-                    class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                    href="#"
-                    >Shop Now</a
-                  >
                 </div>
               </div>
             </div>
@@ -130,7 +114,7 @@
   </div>
   <!-- Carousel End -->
   <!-- Featured Start -->
-  <!-- <div class="container-fluid pt-5">
+  <div class="container-fluid pt-5">
     <div class="row px-xl-5 pb-3">
       <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
         <div
@@ -155,10 +139,11 @@
           class="d-flex align-items-center bg-light mb-4"
           style="padding: 30px"
         >
-          <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
+          <h1 class="fa fa-exchange-alt text-primary m-0 mr-2"></h1>
           <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
         </div>
       </div>
+
       <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
         <div
           class="d-flex align-items-center bg-light mb-4"
@@ -169,119 +154,103 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
   <!-- Featured End -->
-
-  <!-- Products Start -->
-  <!-- <div>
-    <div v-if="loading">Loading...</div>
-    <div v-else>
-      <div v-for="product in products" :key="product.id">
-        <div class="card">
-          <div class="card-header">{{ product.title }}</div>
-          <div class="card-body">
-            <p>{{ product.description }}</p>
-            <p>Price: {{ product.price }}</p>
+  <!-- Categories Start -->
+  <div class="container-fluid pt-5">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+      <span class="bg-secondary pr-3">Categories</span>
+    </h2>
+    <div class="row px-xl-5 pb-3">
+      <div
+        class="col-lg-3 col-md-4 col-sm-6 pb-1"
+        v-for="category in categories"
+        :key="category.id"
+        @click="filterProducts(category.id)"
+      >
+        <a class="text-decoration-none">
+          <div class="cat-item d-flex align-items-center mb-4">
+            <div class="overflow-hidden" style="width: 130px; height: 100px">
+              <img
+                class="img-fluid"
+                :src="`http://localhost:8000/${category.image}`"
+                alt=""
+                style="width: 150px; height: 100px"
+              />
+            </div>
+            <div class="flex-fill pl-3">
+              <h3>{{ category.name }}</h3>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
-  </div> -->
+  </div>
+  <!-- Categories End -->
+  <!-- Products Start -->
 
   <div class="container-fluid pt-5 pb-3">
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
       <span class="bg-secondary pr-3">Featured Products</span>
     </h2>
+    <div class="input-group mb-3 ml-5 w-50">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search for products"
+        v-model="searchTerm"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary bg-warning text-dark"
+          type="button"
+          @click="searchProducts()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
     <div>
-      <div class="row">
-        <div class="col-md-3">
-          <div class="mb-4">
-            <h4
-              class="text-uppercase mx-xl-5 mb-4 d-flex justify-content-center pt-3"
-            >
-              <span class="pr-3">categories</span>
-            </h4>
-            <ul class="list-group list-group-flush">
-              <li
-                class="list-group-item"
-                v-for="category in categories"
-                :key="category.id"
-                @click="filterProducts(category.id)"
-              >
-                {{ category.name }}
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-9">
-          <div class="mb-4">
-            <div class="card-body">
-              <div class="input-group mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Search for products"
-                  v-model="searchTerm"
-                />
-                <div class="input-group-append">
-                  <button
-                    class="btn btn-outline-secondary bg-warning text-dark"
-                    type="button"
-                    @click="searchProducts()"
-                  >
-                    Search
-                  </button>
-                </div>
+      <div class="row px-xl-5">
+        <div
+          class="col-lg-3 col-md-4 col-sm-6 pb-1"
+          v-for="product in products"
+          :key="product.id"
+        >
+          <div class="product-item bg-light mb-4">
+            <div class="product-img position-relative overflow-hidden">
+              <img
+                class="img-fluid w-100"
+                :src="`http://localhost:8000/${product.image}`"
+                alt=""
+              />
+              <div class="product-action">
+                <a
+                  v-on:click="showSwal(product)"
+                  class="btn btn-outline-dark btn-square"
+                  @click="addToCart(product)"
+                  ><i class="fa fa-shopping-cart"></i
+                ></a>
+                <a
+                  class="btn btn-outline-dark btn-square"
+                  @click="addToWishlist(product)"
+                  ><i class="far fa-heart"></i
+                ></a>
+                <a
+                  class="btn btn-outline-dark btn-square"
+                  @click="viewProduct(product.id, product)"
+                  ><i class="fa fa-eye"></i
+                ></a>
               </div>
-              <div class="row">
-                <div
-                  class="col-md-4 mb-4"
-                  v-for="product in products"
-                  :key="product.id"
-                >
-                  <div class="product-item bg-light mb-4">
-                    <div
-                      class="product-img position-relative overflow-hidden aspect-ratio aspect-ratio-1x1"
-                    >
-                      <img
-                        class="card-img-top"
-                        :src="`http://localhost:8000/${product.image}`"
-                        alt=""
-                      />
-
-                      <div class="product-action">
-                        <!-- <button @click="addToCart(product)">Add to Cart</button> -->
-
-                        <a
-                          v-on:click="showSwal(product)"
-                          class="btn btn-outline-dark btn-square"
-                          @click="addToCart(product)"
-                          ><i class="fa fa-shopping-cart"></i
-                        ></a>
-                        <a
-                          class="btn btn-outline-dark btn-square"
-                          @click="addToWishlist(product)"
-                          ><i class="far fa-heart"></i
-                        ></a>
-                        <a
-                          class="btn btn-outline-dark btn-square"
-                          @click="viewProduct(product.id, product)"
-                          ><i class="fa fa-eye"></i
-                        ></a>
-                      </div>
-                      <div class="card-body">
-                        <h5 class="card-title">{{ product.title }}</h5>
-                        <!-- <p class="card-text">{{ product.description }}</p> -->
-                        <h6 class="card-subtitle mb-2 text-muted">
-                          {{ product.price }}$
-                        </h6>
-                        <!-- <button @click="viewProduct(product.id)">
-                          View Details
-                        </button> -->
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            </div>
+            <div class="text-center py-4">
+              <a class="h6 text-decoration-none text-truncate" href="">{{
+                product.title
+              }}</a>
+              <div
+                class="d-flex align-items-center justify-content-center mt-2"
+              >
+                <h5>{{ product.price }}$</h5>
               </div>
             </div>
           </div>
