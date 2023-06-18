@@ -41,11 +41,13 @@
                 </RouterLink>
 
                     <hr>
+                    <router-link to="/Categories">
                     <li class="nav-link">
                         <a href="#">
                             <span class="text nav-text">DISPLAY ALL CATEGORIES</span>
                         </a>
                     </li>
+                </router-link>
                     <hr>
                     <router-link to="/AddCategory">
                     <li class="nav-link">
