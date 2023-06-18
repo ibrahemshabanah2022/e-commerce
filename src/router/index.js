@@ -11,10 +11,16 @@ import Wishlist from "../views/Wishlist.vue";
 import EditProduct from "../views/dashboard/html/EditProduct.vue";
 import AddProduct from "../views/dashboard/html/AddProduct.vue";
 import AddCategory from "../views/dashboard/html/AddCategory.vue";
+import Categories from "../views/dashboard/html/Categories.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: "/Categories",
+      name: "Categories",
+      component: Categories,
+    },
     {
       path: "/AddCategory",
       name: "AddCategory",
