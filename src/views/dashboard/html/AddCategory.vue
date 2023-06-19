@@ -70,19 +70,7 @@
           })
          .then((response) => response.json())
          .then((data) => {
-            // Download image to public/images directory
-            // const imageUrl = data.image;
-            // const filename = imageUrl.split("/").pop();
-            // const filepath = `images/${filename}`;
-            // const file = fs.createWriteStream(filepath);
-            // https
-            //  .get(imageUrl, (response) => {
-            //     response.pipe(file);
-            //     console.log(`Image ${filename} downloaded successfully`);
-            //   })
-            //  .on("error", (error) => {
-            //     console.log(error);
-            //   });
+       
           })
          .catch((error) => {
             console.log(error);
