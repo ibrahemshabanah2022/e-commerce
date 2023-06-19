@@ -36,7 +36,7 @@
                   <td>{{ category.name }}</td>
                 <td>22</td>
                   <td class="align-middle">
-                    <button  @click="viewProduct2(product.id, product)"
+                    <button  @click="updateProduct(category.id, category)"
      class="btn btn-sm btn-info">
                     <i class="fa fa-pencil-square"></i>
                 </button>
@@ -111,8 +111,8 @@
     
             });
         },
-            viewProduct2(id) {
-          this.$router.push(`/EditProduct/${id}`);
+            updateProduct(id) {
+          this.$router.push(`/EditCategory/${id}`);
         },
     },
       data() {
