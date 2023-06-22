@@ -1,4 +1,4 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from "vue-router";
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
@@ -9,7 +9,7 @@ import store from "./store/store";
   <RouterView />
 </template>
 
-<style scoped>
+<style>
 header {
   line-height: 1.5;
   max-height: 100vh;
