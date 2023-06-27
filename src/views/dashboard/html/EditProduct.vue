@@ -27,6 +27,26 @@
             v-model="product.description"
           ></textarea>
         </div>
+        <div>
+          <h3>current Product image</h3>
+          <img
+            :src="`http://localhost:8000/${product.image}`"
+            alt=""
+            style="width: 250px"
+          />
+          <br />
+          <br />
+          <br />
+          <h3>New Product image</h3>
+
+          <img :src="imageUrl" v-if="imageUrl" alt="" style="width: 250px" />
+          <input
+            class="form-control"
+            type="file"
+            id="image"
+            @change="onImageChange"
+          />
+        </div>
         <br />
         <button class="btn btn-dark" type="submit">Update</button>
       </form>
@@ -43,20 +63,30 @@ export default {
   data() {
     return {
       product: {},
+      image: null,
+      imageUrl: "",
     };
   },
   methods: {
+    onImageChange(event) {
+      this.image = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageUrl = reader.result;
+      };
+      reader.readAsDataURL(this.image);
+    },
     updateProduct() {
+      const formData = new FormData();
+      formData.append("title", this.product.title);
+      formData.append("price", this.product.price);
+      formData.append("description", this.product.description);
+
+      formData.append("image", this.image);
       fetch(`http://localhost:8000/api/products/${this.product.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: this.product.title,
-          price: this.product.price,
-          description: this.product.description,
-        }),
+        method: "POST",
+
+        body: formData,
       })
         .then((response) => response.json())
         .then((data) => {
