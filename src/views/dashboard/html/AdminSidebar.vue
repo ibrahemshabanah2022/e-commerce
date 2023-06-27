@@ -109,7 +109,7 @@ body.dark {
   top: 0;
   left: 0;
   height: 100%;
-  width: 290px;
+  width: 300px;
   padding: 10px 14px;
   background: var(--sidebar-color);
   transition: var(--tran-05);
