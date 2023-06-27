@@ -14,13 +14,18 @@
           <br />
           <br />
           <div>
-            <h3>category image</h3>
-
+            <h3>current category image</h3>
             <img
               :src="`http://localhost:8000/${category.image}`"
               alt=""
               style="width: 250px"
             />
+            <br />
+            <br />
+            <br />
+            <h3>New category image</h3>
+
+            <img :src="imageUrl" v-if="imageUrl" alt="" style="width: 250px" />
             <input
               class="form-control"
               type="file"
@@ -45,37 +50,39 @@ export default {
   data() {
     return {
       category: {},
-
+      imageUrl: "",
       name: "",
       image: null,
     };
   },
   methods: {
     onImageChange(event) {
-      this.category.image = event.target.files[0];
+      this.image = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageUrl = reader.result;
+      };
+      reader.readAsDataURL(this.image);
     },
 
     updatecategory() {
       // const userToken = localStorage.getItem("userToken");
       const formData = new FormData();
       formData.append("name", this.category.name);
-
-      formData.append("image", this.category.image);
+      formData.append("image", this.image);
 
       fetch(`http://localhost:8000/api/category/${this.category.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        method: "POST",
+
         body: formData,
       })
         .then((response) => {
           if (response.ok) {
             // Redirect to home page
-            window.location.href = "/products";
+            window.location.href = "/Categories";
           } else {
             // Display error message
-            alert("Failed to add category");
+            alert("Failed to update category");
           }
         })
         .then((response) => response.json())
@@ -92,6 +99,7 @@ export default {
       .then((response) => response.json())
       .then((d) => {
         this.category = d;
+        this.imageUrl = d.image;
       });
   },
 };
