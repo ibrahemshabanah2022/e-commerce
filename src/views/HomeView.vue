@@ -315,7 +315,7 @@ export default {
     const fetchCategories = async () => {
       const response = await fetch("http://localhost:8000/api/category");
       const data = await response.json();
-      categories.value = data;
+      categories.value = data.categories;
     };
 
     const filterProducts = async (categoryId) => {
