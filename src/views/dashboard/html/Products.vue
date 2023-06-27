@@ -15,6 +15,8 @@
                 <th>Products Name</th>
 
                 <th>Price</th>
+                <th>Category Name</th>
+
                 <th>View Product</th>
                 <th>Edit Product</th>
                 <th>Remove</th>
@@ -35,6 +37,8 @@
                 </td>
                 <td>{{ product.title }}</td>
                 <td class="align-middle">{{ product.price }}$</td>
+                <td class="align-middle">{{ product.category.name }}</td>
+
                 <td class="align-middle">
                   <button
                     class="btn btn-sm btn-success"

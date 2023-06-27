@@ -1,5 +1,5 @@
 <template>
-  <AdminSidebar/>
+  <AdminSidebar />
   <section class="home">
     <form class="pl-5 pt-5">
       <div class="pl-5 pt-5">
@@ -7,27 +7,52 @@
         <form @submit.prevent="addProduct">
           <div>
             <label for="title">Title:</label>
-            <input class="form-control" type="text" id="title" v-model="title">
+            <input
+              class="form-control"
+              type="text"
+              id="title"
+              v-model="title"
+            />
           </div>
           <div>
             <label for="price">Price:</label>
-            <input class="form-control" type="number" id="price" v-model="price">
+            <input
+              class="form-control"
+              type="number"
+              id="price"
+              v-model="price"
+            />
           </div>
           <div>
             <label for="description">Description:</label>
-            <textarea class="form-control" id="description" v-model="description"></textarea>
+            <textarea
+              class="form-control"
+              id="description"
+              v-model="description"
+            ></textarea>
           </div>
           <div>
             <label for="category_id">Category:</label>
             <select class="form-control" id="category_id" v-model="category_id">
-              <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+              <option
+                v-for="category in categories"
+                :key="category.id"
+                :value="category.id"
+              >
+                {{ category.name }}
+              </option>
             </select>
           </div>
           <div>
             <label for="image">Image:</label>
-            <input class="form-control" type="file" id="image" @change="onImageChange">
+            <input
+              class="form-control"
+              type="file"
+              id="image"
+              @change="onImageChange"
+            />
           </div>
-          <br><br>
+          <br /><br />
           <button class="btn btn-dark" type="submit">Add Product</button>
         </form>
       </div>
@@ -60,11 +85,11 @@ export default {
   methods: {
     fetchCategories() {
       fetch("http://localhost:8000/api/category")
-       .then((response) => response.json())
-       .then((data) => {
-          this.categories = data;
+        .then((response) => response.json())
+        .then((data) => {
+          this.categories = data.categories;
         })
-       .catch((error) => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -87,7 +112,7 @@ export default {
         },
         body: formData,
       })
-       .then((response) => {
+        .then((response) => {
           if (response.ok) {
             // Redirect to home page
             window.location.href = "/products";
@@ -96,8 +121,8 @@ export default {
             alert("Failed to add product");
           }
         })
-       .then((response) => response.json())
-       .then((data) => {
+        .then((response) => response.json())
+        .then((data) => {
           // Download image to public/images directory
           // const imageUrl = data.image;
           // const filename = imageUrl.split("/").pop();
@@ -112,7 +137,7 @@ export default {
           //     console.log(error);
           //   });
         })
-       .catch((error) => {
+        .catch((error) => {
           console.log(error);
         });
     },
