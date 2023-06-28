@@ -98,7 +98,7 @@
           <div class="offer-text">
             <h6 class="text-white text-uppercase">Save 20%</h6>
             <h3 class="text-white mb-3">Special Offer</h3>
-            <a href="" class="btn btn-primary">Shop Now</a>
+            <a href="#products" class="btn btn-primary">Shop Now</a>
           </div>
         </div>
         <div class="product-offer mb-30" style="height: 200px">
@@ -106,7 +106,7 @@
           <div class="offer-text">
             <h6 class="text-white text-uppercase">Save 20%</h6>
             <h3 class="text-white mb-3">Special Offer</h3>
-            <a href="" class="btn btn-primary">Shop Now</a>
+            <a href="#products" class="btn btn-primary">Shop Now</a>
           </div>
         </div>
       </div>
@@ -156,6 +156,7 @@
     </div>
   </div>
   <!-- Featured End -->
+
   <!-- Categories Start -->
   <div class="container-fluid pt-5">
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
@@ -190,7 +191,10 @@
   <!-- Products Start -->
 
   <div class="container-fluid pt-5 pb-3">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+    <h2
+      class="section-title position-relative text-uppercase mx-xl-5 mb-4"
+      id="products"
+    >
       <span class="bg-secondary pr-3">Featured Products</span>
     </h2>
     <div class="input-group mb-3 ml-5 w-50">
@@ -271,7 +275,6 @@
           <div class="offer-text">
             <h6 class="text-white text-uppercase">Save 20%</h6>
             <h3 class="text-white mb-3">Special Offer</h3>
-            <a href="" class="btn btn-primary">Shop Now</a>
           </div>
         </div>
       </div>
@@ -281,12 +284,12 @@
           <div class="offer-text">
             <h6 class="text-white text-uppercase">Save 20%</h6>
             <h3 class="text-white mb-3">Special Offer</h3>
-            <a href="" class="btn btn-primary">Shop Now</a>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <!-- Offer End -->
   <Footer />
 </template>

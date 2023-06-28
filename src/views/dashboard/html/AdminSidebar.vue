@@ -45,11 +45,11 @@
             </li>
           </router-link>
           <hr />
-          <li class="nav-link">
+          <!-- <li class="nav-link">
             <a href="#">
               <span class="text nav-text">ORDERS</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>

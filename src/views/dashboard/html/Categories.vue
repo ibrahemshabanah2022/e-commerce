@@ -96,7 +96,7 @@ export default {
   mounted() {
     const userToken = localStorage.getItem("userToken");
 
-    fetch("http://localhost:8000/api/category", {
+    fetch("http://localhost:8000/api/categoryAdmin", {
       headers: {
         // Authorization: `Bearer ${userToken}`
       },
