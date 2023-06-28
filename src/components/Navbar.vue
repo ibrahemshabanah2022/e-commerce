@@ -21,57 +21,23 @@
         </div>
       </div>
       <div class="col-lg-6 text-center text-lg-right">
-        <div class="d-inline-flex align-items-center">
-          <div class="btn-group">
-            <button
-              type="button"
-              class="btn btn-sm btn-light dropdown-toggle"
-              data-toggle="dropdown"
-            >
-              My Account
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-              <div v-if="hasUserToken2">
-                <router-link to="/login">
-                  <button class="dropdown-item" type="button">Sign in</button>
-                </router-link>
-
-                <router-link to="/register">
-                  <button class="dropdown-item" type="button">Sign up</button>
-                </router-link>
-              </div>
-
-              <div v-if="hasUserToken">
-                <router-link to="/MyProfile">
-                  <button class="dropdown-item" type="button">
-                    My Profile
-                  </button>
-                </router-link>
-
-                <button class="dropdown-item" type="button" @click="logout">
-                  logout
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="d-inline-flex align-items-center"></div>
         <div class="d-inline-flex align-items-center d-block d-lg-none">
-          <a href="" class="btn px-0 ml-2">
-            <i class="fas fa-heart text-dark"></i>
-            <span
-              class="badge text-dark border border-dark rounded-circle"
-              style="padding-bottom: 2px"
-              >0</span
-            >
-          </a>
-          <a href="" class="btn px-0 ml-2">
-            <i class="fas fa-shopping-cart text-dark"></i>
-            <span
-              class="badge text-dark border border-dark rounded-circle"
-              style="padding-bottom: 2px"
-              >{{ $store.state.cartCount }}</span
-            >
-          </a>
+          <router-link @click="authCheck()" to="/Wishlist">
+            <a class="btn px-0">
+              <i class="fas fa-heart text-primary"></i>
+            </a>
+          </router-link>
+          <router-link @click="authCheck()" to="/cart">
+            <a class="btn px-0 ml-3">
+              <i class="fas fa-shopping-cart text-primary" ref="cartIcon"></i>
+              <span
+                class="badge text-secondary border border-secondary rounded-circle"
+                style="padding-bottom: 2px"
+                >{{ cartCount }}</span
+              >
+            </a>
+          </router-link>
         </div>
       </div>
     </div>
@@ -107,13 +73,37 @@
             class="collapse navbar-collapse justify-content-between"
             id="navbarCollapse"
           >
-            <div class="navbar-nav mr-auto py-0">
+            <div v-if="hasUserToken2" class="navbar-nav mr-auto py-0">
               <router-link to="/"
                 ><a href="index.html" class="nav-item nav-link active"
                   >Home</a
                 ></router-link
               >
-              <a href="shop.html" class="nav-item nav-link">Shop</a>
+
+              <router-link to="/login">
+                <a class="nav-item nav-link active">Sign in</a>
+              </router-link>
+
+              <router-link to="/register">
+                <a class="nav-item nav-link active">Sign up</a>
+              </router-link>
+            </div>
+
+            <div v-if="hasUserToken" class="navbar-nav mr-auto py-0">
+              <router-link to="/"
+                ><a href="index.html" class="nav-item nav-link active"
+                  >Home</a
+                ></router-link
+              >
+              <router-link to="/MyProfile">
+                <a class="nav-item nav-link active"> My Profile </a>
+              </router-link>
+
+              <router-link to="/">
+                <a @click="logout" class="nav-item nav-link active"> logout </a>
+              </router-link>
+            </div>
+            <!-- <a href="shop.html" class="nav-item nav-link">Shop</a>
               <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
               <div class="nav-item dropdown">
                 <a
@@ -127,8 +117,9 @@
                   <a href="checkout.html" class="dropdown-item">Checkout</a>
                 </div>
               </div>
-              <a href="contact.html" class="nav-item nav-link">Contact</a>
-            </div>
+              <router-link to="/contact">
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+              </router-link> -->
             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
               <router-link @click="authCheck()" to="/Wishlist">
                 <a class="btn px-0">
