@@ -73,7 +73,16 @@ export default {
           }),
         });
         const data = await response.json();
-        console.log(data);
+        if (response.ok) {
+          localStorage.setItem("userToken", data.token);
+          window.location.href = "/login"; // redirect to home page
+        } else {
+          alert("Login failed. Please check your credentials and try again.");
+
+          // const errorElement = document.createElement("div");
+          // errorElement.textContent = data.message;
+          // document.body.appendChild(errorElement);
+        }
       } catch (error) {
         console.error(error);
       }
