@@ -26,11 +26,7 @@
             >
               <tr>
                 <td class="align-middle">
-                  <img
-                    :src="`http://localhost:8000/${category.image}`"
-                    alt=""
-                    style="width: 50px"
-                  />
+                  <img :src="category.image" alt="" style="width: 50px" />
                 </td>
                 <td>{{ category.name }}</td>
                 <td>{{ productCounts[category.id] }}</td>
@@ -98,7 +94,7 @@ export default {
 
     fetch("http://localhost:8000/api/categoryAdmin", {
       headers: {
-        // Authorization: `Bearer ${userToken}`
+        Authorization: `Bearer ${userToken}`,
       },
     })
       .then((response) => response.json())

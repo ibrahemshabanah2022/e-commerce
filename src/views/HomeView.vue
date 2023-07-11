@@ -162,6 +162,40 @@
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
       <span class="bg-secondary pr-3">Categories</span>
     </h2>
+
+    <!-- <swiper
+      :modules="modules"
+      :slides-per-view="2"
+      :space-between="25"
+      :pagination="{ clickable: true }"
+      :scrollbar="{ draggable: true }"
+      @swiper="onSwiper"
+      @slideChange="onSlideChange"
+      navigation="true"
+      pagination="true"
+      scrollbar="true"
+    >
+      <SwiperSlide
+        v-for="category in categories"
+        :key="category.id"
+        @click="filterProducts(category.id)"
+        class="hidden-lg"
+      >
+        <div class="cat-item d-flex align-items-center mb-4">
+          <div class="overflow-hidden" style="width: 130px; height: 100px">
+            <img
+              class="img-fluid"
+              :src="category.image"
+              alt=""
+              style="width: 150px; height: 100px"
+            />
+          </div>
+          <div class="flex-fill pl-3">
+            <h5>{{ category.name }}</h5>
+          </div>
+        </div>
+      </SwiperSlide>
+    </swiper> -->
     <div class="row px-xl-5 pb-3">
       <div
         class="col-lg-3 col-md-4 col-sm-6 pb-1"
@@ -195,7 +229,7 @@
       class="section-title position-relative text-uppercase mx-xl-5 mb-4"
       id="products"
     >
-      <span class="bg-secondary pr-3">Featured Products</span>
+      <span class="bg-secondary pr-3">Products</span>
     </h2>
     <div class="input-group mb-3 ml-5 w-50">
       <input
@@ -293,10 +327,14 @@
 import { ref, onMounted } from "vue";
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
 export default {
   components: {
     Navbar,
     Footer,
+    Swiper,
+    SwiperSlide,
   },
   setup() {
     const products = ref([]);
