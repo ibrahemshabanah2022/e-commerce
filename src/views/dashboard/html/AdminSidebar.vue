@@ -1,5 +1,59 @@
 <template>
-  <nav class="sidebar">
+  <v-card>
+    <v-layout>
+      <v-navigation-drawer expand-on-hover>
+        <v-list>
+          <v-list-item
+            prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
+            title="Sandra Adams"
+            subtitle="sandra_a88@gmailcom"
+          ></v-list-item>
+        </v-list>
+
+        <v-divider></v-divider>
+
+        <v-list density="compact" nav>
+          <RouterLink to="/users">
+            <v-list-item
+              class="text-h6"
+              prepend-icon="mdi-folder"
+              value="myfiles"
+              >user</v-list-item
+            >
+          </RouterLink>
+          <v-list-item
+            prepend-icon="mdi-account-multiple"
+            title="Shared with me"
+            value="shared"
+          ></v-list-item>
+          <v-list-item
+            prepend-icon="mdi-star"
+            title="Starred"
+            value="starred"
+          ></v-list-item>
+          <v-list-item
+            prepend-icon="mdi-star"
+            title="Starred"
+            value="starred"
+          ></v-list-item>
+          <v-list-item
+            prepend-icon="mdi-star"
+            title="Starred"
+            value="starred"
+          ></v-list-item>
+          <v-list-item
+            prepend-icon="mdi-star"
+            title="Starred"
+            value="starred"
+          ></v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+
+      <v-main style="height: 250px"></v-main>
+    </v-layout>
+  </v-card>
+
+  <!-- <nav class="sidebar">
     <div class="menu-bar">
       <div class="menu">
         <ul class="menu-links">
@@ -45,20 +99,15 @@
             </li>
           </router-link>
           <hr />
-          <!-- <li class="nav-link">
-            <a href="#">
-              <span class="text nav-text">ORDERS</span>
-            </a>
-          </li> -->
         </ul>
       </div>
     </div>
-  </nav>
+  </nav> -->
 </template>
 <script>
 export default {};
 </script>
-<style>
+<!-- <style>
 .card {
   max-width: 400px;
 }
@@ -366,4 +415,4 @@ body.dark .switch::before {
 body.dark .home .text {
   color: var(--text-color);
 }
-</style>
+</style> -->
