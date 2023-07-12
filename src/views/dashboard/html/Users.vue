@@ -1,9 +1,11 @@
 <template>
-  <AdminSidebar />
   <section class="home">
+    <AdminSidebar />
+    <!-- <v-main style="height: 250px"></v-main> -->
+
     <div class="text">All Users</div>
     <form @submit.prevent="updateProduct">
-      <div class="container-fluid">
+      <div class="container-fluid d-flex pl-500">
         <div class="row px-xl-5">
           <div class="mb-5">
             <table
@@ -24,24 +26,7 @@
                 <tr>
                   <td>{{ user.name }}</td>
                   <td>{{ user.email }}</td>
-                  <!-- <td v-if="user.role == 'admin'">
-                    <select>
-                      <option selected>admin</option>
-                      <option>user</option>
-                    </select>
-                    <button class="btn btn-sm btn-primary" type="submit">
-                      ok
-                    </button>
-                  </td>
-                  <td v-if="user.role == 'user'">
-                    <select>
-                      <option selected>user</option>
-                      <option>admin</option>
-                    </select>
-                    <button class="btn btn-sm btn-primary" type="submit">
-                      ok
-                    </button>
-                  </td> -->
+
                   <td>{{ user.role }}</td>
                   <td class="align-middle">
                     <button
@@ -66,6 +51,7 @@
         </div>
       </div>
     </form>
+    <!-- <v-main style="height: 250px"></v-main> -->
   </section>
 </template>
 <script>
@@ -114,3 +100,10 @@ export default {
   },
 };
 </script>
+<style>
+/* .container-fluid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+</style>
