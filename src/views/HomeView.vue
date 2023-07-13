@@ -123,39 +123,6 @@
       <span class="bg-secondary pr-3">Categories</span>
     </h2>
 
-    <!-- <swiper
-      :modules="modules"
-      :slides-per-view="2"
-      :space-between="25"
-      :pagination="{ clickable: true }"
-      :scrollbar="{ draggable: true }"
-      @swiper="onSwiper"
-      @slideChange="onSlideChange"
-      navigation="true"
-      pagination="true"
-      scrollbar="true"
-    >
-      <SwiperSlide
-        v-for="category in categories"
-        :key="category.id"
-        @click="filterProducts(category.id)"
-        class="hidden-lg"
-      >
-        <div class="cat-item d-flex align-items-center mb-4">
-          <div class="overflow-hidden" style="width: 130px; height: 100px">
-            <img
-              class="img-fluid"
-              :src="category.image"
-              alt=""
-              style="width: 150px; height: 100px"
-            />
-          </div>
-          <div class="flex-fill pl-3">
-            <h5>{{ category.name }}</h5>
-          </div>
-        </div>
-      </SwiperSlide>
-    </swiper> -->
     <div class="row px-xl-5 pb-3">
       <div
         class="col-lg-3 col-md-4 col-sm-6 pb-1"
@@ -183,75 +150,7 @@
   </div>
   <!-- Categories End -->
   <!-- Products Start -->
-
-  <div class="container-fluid pt-5 pb-3">
-    <h2
-      class="section-title position-relative text-uppercase mx-xl-5 mb-4"
-      id="products"
-    >
-      <span class="bg-secondary pr-3">Products</span>
-    </h2>
-    <div class="input-group mb-5 container justify-content-center w-50">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search for products"
-        v-model="searchTerm"
-      />
-      <div class="input-group-append">
-        <button
-          class="btn btn-outline-secondary bg-warning text-dark"
-          type="button"
-          @click="searchProducts()"
-        >
-          Search
-        </button>
-      </div>
-    </div>
-    <div>
-      <div class="row px-xl-5">
-        <div
-          class="col-lg-3 col-md-4 col-sm-6 pb-1"
-          v-for="product in products"
-          :key="product.id"
-        >
-          <div class="product-item bg-light mb-4">
-            <div class="product-img position-relative overflow-hidden">
-              <img class="img-fluid w-100" :src="product.image" alt="" />
-              <div class="product-action">
-                <a
-                  v-on:click="showSwal(product)"
-                  class="btn btn-outline-dark btn-square"
-                  @click="addToCart(product)"
-                  ><i class="fa fa-shopping-cart"></i
-                ></a>
-                <a
-                  class="btn btn-outline-dark btn-square"
-                  @click="addToWishlist(product)"
-                  ><i class="far fa-heart"></i
-                ></a>
-                <a
-                  class="btn btn-outline-dark btn-square"
-                  @click="viewProduct(product.id, product)"
-                  ><i class="fa fa-eye"></i
-                ></a>
-              </div>
-            </div>
-            <div class="text-center py-4">
-              <a class="h6 text-decoration-none text-truncate" href="">{{
-                product.title
-              }}</a>
-              <div
-                class="d-flex align-items-center justify-content-center mt-2"
-              >
-                <h5>{{ product.price }}$</h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <Products />
 
   <!-- Products End -->
 
@@ -289,8 +188,11 @@ import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
+import Products from "./Products.vue";
+
 export default {
   components: {
+    Products,
     Navbar,
     Footer,
     Swiper,
@@ -300,14 +202,6 @@ export default {
     const products = ref([]);
     const categories = ref([]);
     const searchTerm = ref("");
-
-    const fetchProducts = async () => {
-      const response = await fetch(
-        "http://localhost:8000/api/products?offset=0&limit=12"
-      );
-      const data = await response.json();
-      products.value = data;
-    };
 
     const fetchCategories = async () => {
       const response = await fetch("http://localhost:8000/api/category");
@@ -334,7 +228,6 @@ export default {
     };
 
     onMounted(() => {
-      fetchProducts();
       fetchCategories();
     });
 

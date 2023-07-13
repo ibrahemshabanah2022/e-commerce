@@ -17,12 +17,16 @@ import Categories from "../views/dashboard/html/Categories.vue";
 import EditCategory from "../views/dashboard/html/EditCategory.vue";
 import Users from "../views/dashboard/html/Users.vue";
 import EditUser from "../views/dashboard/html/EditUser.vue";
-
-import Dashboard from "../views/dashboard/html/Dashboard.vue";
+import HomeDashboard from "../views/dashboard/html/HomeDashboard.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: "/HomeDashboard",
+      name: "HomeDashboard",
+      component: HomeDashboard,
+    },
     {
       path: "/Contact",
       name: "Contact",
@@ -109,11 +113,6 @@ const router = createRouter({
       path: "/cart",
       name: "cart",
       component: Cart,
-    },
-    {
-      path: "/Dashboard",
-      name: "Dashboard",
-      component: Dashboard,
     },
   ],
 });
