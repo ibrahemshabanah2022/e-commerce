@@ -18,6 +18,8 @@ import EditCategory from "../views/dashboard/html/EditCategory.vue";
 import Users from "../views/dashboard/html/Users.vue";
 import EditUser from "../views/dashboard/html/EditUser.vue";
 
+import Dashboard from "../views/dashboard/html/Dashboard.vue";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -109,9 +111,9 @@ const router = createRouter({
       component: Cart,
     },
     {
-      // path: '/about',
-      // name: 'about',
-      // component: () => import('../views/AboutView.vue')
+      path: "/Dashboard",
+      name: "Dashboard",
+      component: Dashboard,
     },
   ],
 });
