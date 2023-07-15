@@ -18,7 +18,7 @@
               <div
                 class="product-img position-relative overflow-hidden aspect-ratio aspect-ratio-1x1"
               >
-                <img class="card-img-top" :src="product.images" alt="" />
+                <img class="card-img-top" :src="product.image" alt="" />
 
                 <div class="product-action">
                   <!-- <button @click="addToCart(product)">Add to Cart</button> -->
