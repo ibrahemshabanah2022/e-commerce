@@ -20,6 +20,7 @@
               >Shop</span
             >
           </router-link>
+
           <button
             type="button"
             class="navbar-toggler"
@@ -62,27 +63,24 @@
                 <a @click="logout" class="nav-item nav-link active"> logout </a>
               </router-link>
             </div>
-
-            <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-              <router-link @click="authCheck()" to="/Wishlist">
-                <a class="btn px-0">
-                  <i class="fas fa-heart" style="color: #f1d333"></i>
-                </a> </router-link
-              ><router-link @click="authCheck()" to="/cart">
-                <a class="btn px-0 ml-3">
-                  <i
-                    class="fas fa-shopping-cart"
-                    ref="cartIcon"
-                    style="color: #f1d333"
-                  ></i>
-                  <span
-                    class="badge border rounded-circle"
-                    style="padding-bottom: 2px; color: #f1d333"
-                    >{{ cartCount }}</span
-                  >
-                </a>
-              </router-link>
-            </div>
+            <router-link @click="authCheck()" to="/Wishlist">
+              <a class="btn px-0">
+                <i class="fas fa-heart" style="color: #f1d333"></i>
+              </a> </router-link
+            ><router-link @click="authCheck()" to="/cart">
+              <a class="btn px-0 ml-3">
+                <i
+                  class="fas fa-shopping-cart"
+                  ref="cartIcon"
+                  style="color: #f1d333"
+                ></i>
+                <span
+                  class="badge border rounded-circle"
+                  style="padding-bottom: 2px; color: #f1d333"
+                  >{{ cartCount }}</span
+                >
+              </a>
+            </router-link>
           </div>
         </nav>
       </div>

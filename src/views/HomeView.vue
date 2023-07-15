@@ -29,6 +29,7 @@
                 style="object-fit: cover"
               />
               <div
+                style="background-color: transparent"
                 class="carousel-caption d-flex flex-column align-items-center justify-content-center"
               >
                 <div class="p-3" style="max-width: 700px">
@@ -51,6 +52,7 @@
                 style="object-fit: cover"
               />
               <div
+                style="background-color: transparent"
                 class="carousel-caption d-flex flex-column align-items-center justify-content-center"
               >
                 <div class="p-3" style="max-width: 700px">
@@ -73,6 +75,7 @@
                 style="object-fit: cover"
               />
               <div
+                style="background-color: transparent"
                 class="carousel-caption d-flex flex-column align-items-center justify-content-center"
               >
                 <div class="p-3" style="max-width: 700px">
@@ -98,7 +101,9 @@
           <div class="offer-text">
             <h6 class="text-white text-uppercase">Save 20%</h6>
             <h3 class="text-white mb-3">Special Offer</h3>
-            <a href="#products" class="btn btn-primary">Shop Now</a>
+            <button style="background-color: #f1d333">
+              <a href="#products" class="btn">Shop Now</a>
+            </button>
           </div>
         </div>
         <div class="product-offer mb-30" style="height: 200px">
@@ -106,7 +111,9 @@
           <div class="offer-text">
             <h6 class="text-white text-uppercase">Save 20%</h6>
             <h3 class="text-white mb-3">Special Offer</h3>
-            <a href="#products" class="btn btn-primary">Shop Now</a>
+            <button style="background-color: #f1d333">
+              <a href="#products" class="btn">Shop Now</a>
+            </button>
           </div>
         </div>
       </div>

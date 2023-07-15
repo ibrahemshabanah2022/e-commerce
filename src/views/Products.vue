@@ -6,7 +6,7 @@
       class="section-title position-relative text-uppercase mx-xl-5 mb-4"
       id="products"
     >
-      <span class="bg-secondary pr-3">Products</span>
+      <span class="pr-3" style="background-color: #f5f5f5">Products</span>
     </h2>
     <div class="input-group mb-5 container justify-content-center w-50">
       <input
