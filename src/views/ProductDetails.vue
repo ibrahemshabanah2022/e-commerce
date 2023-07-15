@@ -8,11 +8,7 @@
         <div id="product-carousel" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner bg-light">
             <div class="carousel-item active">
-              <img
-                class="card-img-top"
-                :src="`http://localhost:8000/${product.image}`"
-                alt=""
-              />
+              <img class="card-img-top" :src="product.image" alt="" />
             </div>
           </div>
           <a
