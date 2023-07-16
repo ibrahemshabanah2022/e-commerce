@@ -10,31 +10,27 @@
       :modules="modules"
       :breakpoints="breakpoints"
       :slides-per-view="5"
-      :space-between="50"
+      :space-between="11"
       navigation
-      :pagination="{ clickable: true }"
-      :scrollbar="{ draggable: true }"
       @swiper="onSwiper"
       @slideChange="onSlideChange"
+      class="swiper-container"
     >
       <swiper-slide
+        class="swiper-slide"
         v-for="category in categories"
         :key="category.id"
         @click="filterProducts(category.id)"
       >
         <a class="text-decoration-none">
-          <div class="cat-item d-flex align-items-center mb-4">
-            <div class="overflow-hidden" style="width: 130px; height: 100px">
-              <img
-                class="img-fluid"
-                :src="category.image"
-                alt=""
-                style="width: 150px; height: 100px"
-              />
-            </div>
-            <div class="flex-fill pl-3">
-              <h3>{{ category.name }}</h3>
-            </div>
+          <img
+            class="img-fluid"
+            :src="category.image"
+            alt=""
+            style="width: 350px; height: 150px"
+          />
+          <div class="container text-center">
+            <h5 class="align-self-center">{{ category.name }}</h5>
           </div>
         </a>
       </swiper-slide>
@@ -342,3 +338,12 @@ export default {
   },
 };
 </script>
+<style>
+.swiper-container {
+  width: 90%;
+  max-width: 1200px;
+}
+/* .swiper-slide {
+  width: 100px;
+} */
+</style>
