@@ -6,10 +6,18 @@
     >
       <span class="pr-3" style="background-color: #f5f5f5">Categories</span>
     </h2>
-
-    <div class="row px-xl-5 pb-3">
-      <div
-        class="col-lg-3 col-md-4 col-sm-6 pb-1"
+    <swiper
+      :modules="modules"
+      :breakpoints="breakpoints"
+      :slides-per-view="5"
+      :space-between="50"
+      navigation
+      :pagination="{ clickable: true }"
+      :scrollbar="{ draggable: true }"
+      @swiper="onSwiper"
+      @slideChange="onSlideChange"
+    >
+      <swiper-slide
         v-for="category in categories"
         :key="category.id"
         @click="filterProducts(category.id)"
@@ -29,8 +37,8 @@
             </div>
           </div>
         </a>
-      </div>
-    </div>
+      </swiper-slide>
+    </swiper>
   </div>
   <div class="container-fluid pt-5 pb-3">
     <h2
@@ -104,6 +112,18 @@
 </template>
 
 <script>
+// import Swiper core and required modules
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from "swiper/vue";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+
 import { ref, onMounted } from "vue";
 
 import Products from "./Products.vue";
@@ -111,8 +131,31 @@ import Products from "./Products.vue";
 export default {
   components: {
     Products,
+    Swiper,
+    SwiperSlide,
   },
   setup() {
+    const breakpoints = {
+      // Set breakpoints for medium and small screens
+      320: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      640: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+      960: {
+        slidesPerView: 5,
+        spaceBetween: 40,
+      },
+    };
+    const onSwiper = (swiper) => {
+      console.log(swiper);
+    };
+    const onSlideChange = () => {
+      console.log("slide change");
+    };
     const products = ref([]);
     const categories = ref([]);
 
@@ -155,9 +198,14 @@ export default {
     });
 
     return {
+      breakpoints,
+
       products,
       categories,
       filterProducts,
+      onSwiper,
+      onSlideChange,
+      modules: [Navigation, Pagination, Scrollbar, A11y],
     };
   },
   methods: {
