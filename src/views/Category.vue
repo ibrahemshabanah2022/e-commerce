@@ -1,6 +1,9 @@
 <template>
   <div class="container-fluid pt-5">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+    <h2
+      class="section-title position-relative text-uppercase mx-xl-5 mb-4"
+      id="category"
+    >
       <span class="pr-3" style="background-color: #f5f5f5">Categories</span>
     </h2>
 

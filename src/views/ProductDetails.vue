@@ -32,13 +32,7 @@
         <div class="h-100 bg-light p-30">
           <h3>{{ product.title }}</h3>
           <div class="d-flex mb-3">
-            <div class="text-primary mr-2">
-              <!-- <small class="fas fa-star"></small>
-              <small class="fas fa-star"></small>
-              <small class="fas fa-star"></small>
-              <small class="fas fa-star-half-alt"></small>
-              <small class="far fa-star"></small> -->
-            </div>
+            <div class="text-primary mr-2"></div>
           </div>
           <h3 class="font-weight-semi-bold mb-4">{{ product.price }}$</h3>
           <p class="mb-4">
@@ -48,9 +42,10 @@
           <div class="d-flex mb-4"></div>
           <div class="d-flex align-items-center mb-4 pt-2">
             <button
-              class="btn btn-primary px-3"
+              class="btn px-3"
               v-on:click="showSwal()"
               @click="saveProduct()"
+              style="background-color: #f1d333"
             >
               <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
             </button>

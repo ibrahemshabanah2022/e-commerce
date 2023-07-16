@@ -112,7 +112,7 @@
             <h6 class="text-white text-uppercase">Save 20%</h6>
             <h3 class="text-white mb-3">Special Offer</h3>
             <button style="background-color: #f1d333">
-              <a href="#products" class="btn">Shop Now</a>
+              <a href="#category" class="btn">Shop Now</a>
             </button>
           </div>
         </div>

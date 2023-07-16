@@ -36,6 +36,7 @@
                       @click="decrementQuantity(product)"
                       class="btn btn-sm btn-primary btn-minus"
                       :disabled="product.quantity === 1"
+                      style="background-color: #f1d333"
                     >
                       <i class="fa fa-minus"></i>
                     </button>
@@ -45,6 +46,7 @@
                     <button
                       @click="incrementQuantity(product)"
                       class="btn btn-sm btn-primary btn-plus"
+                      style="background-color: #f1d333"
                     >
                       <i class="fa fa-plus"></i>
                     </button>
@@ -69,7 +71,9 @@
       </div>
       <div class="col-lg-4">
         <h5 class="section-title position-relative text-uppercase mb-3">
-          <span class="bg-secondary pr-3">Cart Summary</span>
+          <span class="pr-3" style="background-color: #f5f5f5"
+            >Cart Summary</span
+          >
         </h5>
         <div class="bg-light p-30 mb-5">
           <div class="border-bottom pb-2">
@@ -88,7 +92,8 @@
               <h2>${{ totalPrice }}</h2>
             </div>
             <button
-              class="btn btn-block btn-primary font-weight-bold my-3 py-3"
+              class="btn btn-block font-weight-bold my-3 py-3"
+              style="background-color: #f1d333"
             >
               Proceed To Checkout
             </button>
