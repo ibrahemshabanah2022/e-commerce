@@ -128,7 +128,7 @@ export default {
     // Set the savedProducts data property to the retrieved products
     this.savedProducts = products.map((product) => ({
       ...product,
-      quantity: product.quantity || 1,
+      quantity: product.quantity,
     }));
 
     // Calculate the total price of the products
@@ -151,6 +151,16 @@ export default {
       product.quantity++;
       this.totalPrice = this.calculateTotalPrice(this.savedProducts);
       localStorage.setItem("product", JSON.stringify(this.savedProducts));
+
+      fetch("http://127.0.0.1:8000/api/cart/increase-quantity", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: product.id,
+        }),
+      });
     },
 
     decrementQuantity(product) {
@@ -159,6 +169,16 @@ export default {
         this.totalPrice = this.calculateTotalPrice(this.savedProducts);
         localStorage.setItem("product", JSON.stringify(this.savedProducts));
       }
+
+      fetch("http://127.0.0.1:8000/api/cart/decrease-quantity", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: product.id,
+        }),
+      });
     },
     // Remove a product from the cart
     //  removeProduct(productId) {
