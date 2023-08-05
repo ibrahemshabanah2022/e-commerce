@@ -91,12 +91,22 @@
               <h5>Total</h5>
               <h2>${{ totalPrice }}</h2>
             </div>
-            <button
+            <form @submit.prevent="submitForm">
+              <!-- form fields here -->
+              <button
+                class="btn btn-block font-weight-bold my-3 py-3"
+                style="background-color: #f1d333"
+                type="submit"
+              >
+                Proceed To Checkout
+              </button>
+            </form>
+            <!-- <button
               class="btn btn-block font-weight-bold my-3 py-3"
               style="background-color: #f1d333"
             >
               Proceed To Checkout
-            </button>
+            </button> -->
           </div>
         </div>
       </div>
@@ -118,17 +128,32 @@ export default {
       savedProducts: [],
       cartItems: JSON.parse(localStorage.getItem("product")) || [],
       totalPrice: 0,
+      products: [],
     };
   },
 
   mounted() {
+    // const userToken = localStorage.getItem("userToken");
+
+    // fetch("http://127.0.0.1:8000/api/cartProducts", {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${userToken}`,
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     this.products = data.products;
+    //   });
+
     // Get saved products from local storage
     let products = JSON.parse(localStorage.getItem("product")) || [];
 
     // Set the savedProducts data property to the retrieved products
     this.savedProducts = products.map((product) => ({
       ...product,
-      quantity: product.quantity,
+      quantity: product.quantity || 1,
     }));
 
     // Calculate the total price of the products
@@ -136,6 +161,27 @@ export default {
   },
 
   methods: {
+    submitForm() {
+      const userToken = localStorage.getItem("userToken");
+
+      fetch("http://127.0.0.1:8000/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        // body: JSON.stringify(this.formData)
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // handle response data here
+          // Redirect the user to the checkout URL
+          window.open(data.url, "_blank");
+        })
+        .catch((error) => {
+          // handle error here
+        });
+    },
     calculateTotalPrice(products) {
       let totalPrice = 0;
 
