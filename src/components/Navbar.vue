@@ -100,34 +100,77 @@ export default {
         return;
       }
     },
-
     logout() {
-      const token = localStorage.getItem("token");
+      const userToken = localStorage.getItem("userToken");
 
-      fetch("http://127.0.0.1:8000/api/logout", {
-        method: "POST",
+      // Make a DELETE request to the API to delete the user's products
+      fetch("http://127.0.0.1:8000/api/deleteProducts", {
+        method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
         },
       })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          // Perform any additional actions after logout, such as redirecting the user
         })
         .catch((error) => {
           console.error(error);
         });
 
-      // Remove the userToken from localStorage
-      localStorage.removeItem("userToken");
-      // Redirect the user to the login page
-      window.location.reload();
-    },
+      // Make a POST request to the API to log out the user
+      fetch("http://127.0.0.1:8000/api/logout", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
 
+          // Remove the userToken from localStorage
+          localStorage.removeItem("userToken");
+          localStorage.removeItem("product");
+
+          // Redirect the user to the login page
+          this.$router.push("/login");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
     // logout() {
+    //   const userToken = localStorage.getItem("userToken");
+    //   fetch("http://127.0.0.1:8000/api/deleteProducts", {
+    //     method: "DELETE",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${userToken}`,
+    //     },
+    //   });
+
+    //   fetch("http://127.0.0.1:8000/api/logout", {
+    //     method: "POST",
+    //     headers: {
+    //       Authorization: `Bearer ${userToken}`,
+    //     },
+    //   })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //       // Perform any additional actions after logout, such as redirecting the user
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //     });
+
     //   // Remove the userToken from localStorage
+
     //   localStorage.removeItem("userToken");
+    //   localStorage.removeItem("product");
+
     //   // Redirect the user to the login page
     //   window.location.reload();
     // },

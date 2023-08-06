@@ -145,9 +145,11 @@ export default {
     //   .then((response) => response.json())
     //   .then((data) => {
     //     this.products = data.products;
+    //     console.log(data);
     //   });
 
     // Get saved products from local storage
+
     let products = JSON.parse(localStorage.getItem("product")) || [];
 
     // Set the savedProducts data property to the retrieved products
@@ -226,31 +228,7 @@ export default {
         }),
       });
     },
-    // Remove a product from the cart
-    //  removeProduct(productId) {
-    //   fetch('http://127.0.0.1:8000/api/cart/deleteproduct', {
-    //     method: 'DELETE',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //       cart_product_id: productId
-    //     })
-    //   })
-    //  .then(response => {
-    //     if (response.ok) {
-    //       // Product was removed from the cart
-    //       console.log('Product removed from cart');
-    //     } else {
-    //       // Error removing product from the cart
-    //       console.log('Error removing product from cart');
-    //     }
-    //   })
-    //  .catch(error => {
-    //     // Error removing product from the cart
-    //     console.log('Error removing product from cart:', error);
-    //   });
-    // },
+
     removeProduct(productId) {
       // Remove the product from the cartItems array
       this.cartItems = this.cartItems.filter((item) => item.id !== productId);
