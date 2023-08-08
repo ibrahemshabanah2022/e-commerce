@@ -101,6 +101,7 @@ export default {
       }
     },
     logout() {
+      //when user logout userToken and products in his cart  will be deleted from localstorage and database
       const userToken = localStorage.getItem("userToken");
 
       // Make a DELETE request to the API to delete the user's products
@@ -141,39 +142,6 @@ export default {
           console.error(error);
         });
     },
-    // logout() {
-    //   const userToken = localStorage.getItem("userToken");
-    //   fetch("http://127.0.0.1:8000/api/deleteProducts", {
-    //     method: "DELETE",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${userToken}`,
-    //     },
-    //   });
-
-    //   fetch("http://127.0.0.1:8000/api/logout", {
-    //     method: "POST",
-    //     headers: {
-    //       Authorization: `Bearer ${userToken}`,
-    //     },
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //       // Perform any additional actions after logout, such as redirecting the user
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //     });
-
-    //   // Remove the userToken from localStorage
-
-    //   localStorage.removeItem("userToken");
-    //   localStorage.removeItem("product");
-
-    //   // Redirect the user to the login page
-    //   window.location.reload();
-    // },
   },
   computed: {
     cartCount() {

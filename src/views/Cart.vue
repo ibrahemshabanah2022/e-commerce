@@ -4,7 +4,11 @@
   <div class="container-fluid">
     <div class="row px-xl-5">
       <div class="col-lg-8 table-responsive mb-5">
+        <div v-if="savedProducts.length === 0">
+          <h1>Your cart is empty</h1>
+        </div>
         <table
+          v-else
           class="table table-light table-borderless table-hover text-center mb-0"
         >
           <thead class="thead-dark">
@@ -69,7 +73,7 @@
           </tbody>
         </table>
       </div>
-      <div class="col-lg-4">
+      <div v-if="savedProducts.length !== 0" class="col-lg-4">
         <h5 class="section-title position-relative text-uppercase mb-3">
           <span class="pr-3" style="background-color: #f5f5f5"
             >Cart Summary</span
