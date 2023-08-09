@@ -102,8 +102,37 @@
           </div>
         </div>
       </div>
+      <div class="input-group mb-5 container justify-content-center w-50">
+        <div class="pl-5">
+          <button
+            v-if="pagination.previous"
+            class="btn btn-outline-secondary bg-warning text-dark"
+            type="button"
+          >
+            <a @click="handlePreviousClick">{{ "<<Previous page " }}</a>
+          </button>
+        </div>
+        <div class="pl-5">
+          <button
+            v-if="pagination.next"
+            class="btn btn-outline-secondary bg-warning text-dark"
+            type="button"
+          >
+            <a @click="handleNextClick">{{ "Next page>>" }}</a>
+          </button>
+        </div>
+      </div>
+      <!-- <ul>
+        <li v-if="pagination.previous">
+          <a :href="pagination.previous">{{ "Previous" }}</a>
+        </li>
+        <li v-if="pagination.next">
+          <a :href="pagination.next">{{ "Next" }}</a>
+        </li>
+      </ul> -->
     </div>
   </div>
+
   <!-- <Products /> -->
 </template>
 
@@ -125,12 +154,19 @@ import { ref, onMounted } from "vue";
 import Products from "./Products.vue";
 
 export default {
+  name: "ProductList",
+  props: {
+    initialUrl: {
+      type: String,
+      default: "http://localhost:8000/api/products",
+    },
+  },
   components: {
     Products,
     Swiper,
     SwiperSlide,
   },
-  setup() {
+  setup(props) {
     const breakpoints = {
       // Set breakpoints for medium and small screens
       320: {
@@ -154,20 +190,47 @@ export default {
     };
     const products = ref([]);
     const categories = ref([]);
-
+    const pagination = ref({
+      previous: null,
+      next: null,
+    });
     const fetchCategories = async () => {
       const response = await fetch("http://localhost:8000/api/category");
       const data = await response.json();
       categories.value = data.categories;
     };
 
-    const fetchProducts = async () => {
-      const response = await fetch(
-        "http://localhost:8000/api/products?offset=0&limit=12"
-      );
+    // const fetchProducts = async () => {
+    //   const response = await fetch("http://localhost:8000/api/products");
+    //   const data = await response.json();
+    //   products.value = data.data;
+    //   pagination.value.previous = data.links.previous;
+    //   pagination.value.next = data.links.next;
+    // };
+    const fetchProducts = async (url) => {
+      const response = await fetch(url || props.initialUrl);
       const data = await response.json();
-      products.value = data;
+      products.value = data.data;
+      pagination.value.previous = data.links.previous;
+      pagination.value.next = data.links.next;
     };
+
+    const handleNextClick = () => {
+      fetchProducts(pagination.value.next);
+    };
+
+    const handlePreviousClick = () => {
+      fetchProducts(pagination.value.previous);
+    };
+
+    fetchProducts();
+    // const fetchProducts = async (url) => {
+    //   const response = await fetch(url);
+    //   const data = await response.json();
+    //   products.value = data.data;
+    //   pagination.value.previous = data.links.previous;
+    //   pagination.value.next = data.links.next;
+    // };
 
     const filterProducts = async (categoryId) => {
       const response = await fetch(`http://localhost:8000/api/products`);
@@ -194,8 +257,11 @@ export default {
     });
 
     return {
+      handleNextClick,
+      handlePreviousClick,
+      fetchProducts,
       breakpoints,
-
+      pagination,
       products,
       categories,
       filterProducts,
