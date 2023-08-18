@@ -20,7 +20,7 @@
         class="swiper-slide"
         v-for="category in categories"
         :key="category.id"
-        @click="filterProducts(category.id)"
+        @click="navigateToCategory(category.id)"
       >
         <a class="text-decoration-none">
           <img
@@ -29,8 +29,10 @@
             alt=""
             style="width: 350px; height: 150px"
           />
-          <div class="container text-center">
-            <h5 class="align-self-center">{{ category.name }}</h5>
+          <div class="container text-center cursor-pointer">
+            {{ category.name }}
+
+            <!-- <h5 class="align-self-center">{{ category.name }}</h5> -->
           </div>
         </a>
       </swiper-slide>
@@ -103,23 +105,31 @@
         </div>
       </div>
       <div class="input-group mb-5 container justify-content-center w-50">
+        <div class="pl-5"></div>
         <div class="pl-5">
-          <button
-            v-if="pagination.previous"
-            class="btn btn-outline-secondary bg-warning text-dark"
-            type="button"
-          >
-            <a @click="handlePreviousClick">{{ "<<Previous page " }}</a>
-          </button>
-        </div>
-        <div class="pl-5">
-          <button
-            v-if="pagination.next"
-            class="btn btn-outline-secondary bg-warning text-dark"
-            type="button"
-          >
-            <a @click="handleNextClick">{{ "Next page>>" }}</a>
-          </button>
+          <div class="text-center">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item">
+                  <a
+                    v-if="pagination.previous"
+                    @click="handlePreviousClick"
+                    class="page-link"
+                    >Previous</a
+                  >
+                </li>
+
+                <li class="page-item">
+                  <a
+                    v-if="pagination.next"
+                    @click="handleNextClick"
+                    class="page-link"
+                    >Next</a
+                  >
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
       <!-- <ul>
@@ -165,6 +175,11 @@ export default {
     Products,
     Swiper,
     SwiperSlide,
+  },
+  data() {
+    return {
+      page: 1,
+    };
   },
   setup(props) {
     const breakpoints = {
@@ -235,8 +250,8 @@ export default {
     const filterProducts = async (categoryId) => {
       const response = await fetch(`http://localhost:8000/api/products`);
       const data = await response.json();
-      const filteredProducts = data.filter(
-        (product) => product.category_id === categoryId
+      const filteredProducts = data.data.filter(
+        (product) => product.category_id == categoryId
       );
       products.value = filteredProducts;
     };
@@ -244,7 +259,7 @@ export default {
     const searchProducts = async () => {
       const response = await fetch(`http://localhost:8000/api/products`);
       const data = await response.json();
-      const filteredProduct = data.filter(
+      const filteredProduct = data.data.filter(
         (product) => product.title === searchTerm.value
       );
       products.value = filteredProduct;
@@ -267,10 +282,14 @@ export default {
       filterProducts,
       onSwiper,
       onSlideChange,
+
       modules: [Navigation, Pagination, Scrollbar, A11y],
     };
   },
   methods: {
+    navigateToCategory(categoryId) {
+      this.$router.push(`/categoryProducts/${categoryId}`);
+    },
     addToWishlist(product) {
       const userToken = localStorage.getItem("userToken");
       if (!userToken) {
@@ -405,9 +424,15 @@ export default {
 };
 </script>
 <style>
+a {
+  cursor: pointer;
+}
 .swiper-container {
   width: 90%;
   max-width: 1200px;
+}
+.v-pagination__next {
+  color: blue;
 }
 /* .swiper-slide {
   width: 100px;

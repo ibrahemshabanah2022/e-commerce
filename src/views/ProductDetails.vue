@@ -112,16 +112,22 @@ export default {
 
       // Check if the product is already in the cart
       const productIndex = products.findIndex((p) => p.id === this.product.id);
+      const userToken = localStorage.getItem("userToken");
 
-      if (productIndex === -1) {
-        // If the product is not in the cart, add it to the array
-        products.push(this.product);
-
-        // Save the updated array to local storage
-        localStorage.setItem("product", JSON.stringify(products));
+      if (!userToken) {
+        window.location.href = "/login";
+        return;
       } else {
-        // If the product is already in the cart, do nothing
-        alert("Product already in cart");
+        if (productIndex === -1) {
+          // If the product is not in the cart, add it to the array
+          products.push(this.product);
+
+          // Save the updated array to local storage
+          localStorage.setItem("product", JSON.stringify(products));
+        } else {
+          // If the product is already in the cart, do nothing
+          alert("Product already in cart");
+        }
       }
     },
   },

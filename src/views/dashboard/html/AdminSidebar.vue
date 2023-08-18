@@ -53,7 +53,7 @@
 <script>
 export default {};
 </script>
-<style>
+<style scoped>
 .card {
   max-width: 400px;
 }
@@ -100,7 +100,7 @@ body.dark {
 
 /* ===== Sidebar ===== */
 .sidebar {
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   left: 0;
   height: 100%;

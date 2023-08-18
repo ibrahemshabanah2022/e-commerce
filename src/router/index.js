@@ -9,6 +9,7 @@ import Products from "../views/dashboard/html/Products.vue";
 import AdminProductDetails from "../views/dashboard/html/AdminProductDetails.vue";
 import Wishlist from "../views/Wishlist.vue";
 import Contact from "../views/Contact.vue";
+import CategoryProducts from "../views/CategoryProducts.vue";
 
 import EditProduct from "../views/dashboard/html/EditProduct.vue";
 import AddProduct from "../views/dashboard/html/AddProduct.vue";
@@ -113,6 +114,11 @@ const router = createRouter({
       path: "/cart",
       name: "cart",
       component: Cart,
+    },
+    {
+      path: "/CategoryProducts/:id",
+      name: "CategoryProducts",
+      component: CategoryProducts,
     },
   ],
 });
