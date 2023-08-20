@@ -29,18 +29,18 @@
             <div
               class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
             >
-              <input type="number" class="border" v-model="minPrice" />
+              <!-- <input type="number" class="border" v-model="minPrice" /> -->
 
               <span class="badge border font-weight-normal">min</span>
             </div>
             <div
               class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
             >
-              <input type="number " class="border" v-model="maxPrice" />
+              <!-- <input type="number " class="border" v-model="maxPrice" /> -->
 
               <span class="badge border font-weight-normal">max</span>
             </div>
-            <button @click="getProducts">Get Products</button>
+            <button @click="getProducts()">Get Products</button>
           </form>
         </div>
         <!-- Price End -->
@@ -124,22 +124,14 @@ export default {
   },
   methods: {
     getProducts() {
-      fetch("http://127.0.0.1:8000/api/filterProductsBYprice", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          min_price: 111,
-          max_price: 2000,
-        }),
-      })
+      fetch("http://127.0.0.1:8000/api/filterProductsBYprice")
         .then((response) => response.json())
         .then((data) => {
           this.products = data;
+          console.log(data);
         })
         .catch((error) => {
-          console.error(error);
+          console.log(error);
         });
     },
     showSwal(product) {
