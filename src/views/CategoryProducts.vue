@@ -14,7 +14,11 @@
     </div>
   </div>
   <!-- Breadcrumb End -->
-
+  <v-text-field
+    placeholder="Search"
+    v-model="searchTerm"
+    @input="filterProductsSearch()"
+  ></v-text-field>
   <!-- Shop Start -->
   <div class="container-fluid">
     <div class="row px-xl-5">
@@ -48,7 +52,7 @@
 
             <span class="badge border font-weight-normal">max</span>
           </div>
-          <button @click="filterProducts()">Filter</button>
+          <v-btn color="purple" @click="filterProducts()"> Filter </v-btn>
         </div>
         <!-- Price End -->
       </div>
@@ -132,21 +136,25 @@ export default {
   data() {
     return {
       products: [],
-      category: [],
-
+      categoryId: [],
+      searchTerm: "",
       categoryName: "",
       minPrice: 0,
       maxPrice: 0,
+      searchTerm: "",
     };
   },
 
   methods: {
     filterProducts() {
-      const { minPrice, maxPrice } = this;
+      const id = this.$route.params.id;
+      const params = new URLSearchParams();
+      const { minPrice, maxPrice, categoryId } = this;
+      params.append("category_id", id);
 
       axios
         .get(
-          `http://127.0.0.1:8000/api/filterProductsBYprice?min_price=${minPrice}&max_price=${maxPrice}`
+          `http://127.0.0.1:8000/api/filterProductsBYprice?min_price=${minPrice}&max_price=${maxPrice}&category_id=${id}`
         )
         .then((response) => {
           this.products = response.data;
@@ -155,6 +163,19 @@ export default {
           console.log(error);
         });
     },
+
+    filterProductsSearch() {
+      const searchTerm = this.searchTerm;
+
+      this.filteredProducts = this.products.map((product) => {
+        return product.name.toLowerCase().includes(searchTerm.toLowerCase())
+          ? product
+          : null;
+      });
+
+      this.products = this.filteredProducts;
+    },
+
     showSwal(product) {
       let productt = JSON.parse(localStorage.getItem("product")) || [];
       const tIndex = productt.findIndex((p) => p.id === product.id);
@@ -272,7 +293,7 @@ export default {
       );
       const data = response.data;
       this.products = data.ProductByCategory;
-      this.category = data.getCategory;
+      this.categoryId = data.getCategory;
       this.categoryName = data.getCategory[50].name;
     } catch (error) {
       console.error(error);
