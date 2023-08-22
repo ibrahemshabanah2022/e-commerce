@@ -25,23 +25,30 @@
           <span class="bg-secondary pr-3">Filter by price</span>
         </h5>
         <div class="bg-light p-4 mb-30">
-          <form>
-            <div
-              class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
-            >
-              <!-- <input type="number" class="border" v-model="minPrice" /> -->
+          <div
+            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
+          >
+            <input
+              type="number"
+              v-model="minPrice"
+              placeholder="Minimum Price"
+            />
+            <!-- @input="filterProducts" -->
 
-              <span class="badge border font-weight-normal">min</span>
-            </div>
-            <div
-              class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
-            >
-              <!-- <input type="number " class="border" v-model="maxPrice" /> -->
+            <span class="badge border font-weight-normal">min</span>
+          </div>
+          <div
+            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
+          >
+            <input
+              type="number"
+              v-model="maxPrice"
+              placeholder="Maximum Price"
+            />
 
-              <span class="badge border font-weight-normal">max</span>
-            </div>
-            <button @click="getProducts()">Get Products</button>
-          </form>
+            <span class="badge border font-weight-normal">max</span>
+          </div>
+          <button @click="filterProducts()">Filter</button>
         </div>
         <!-- Price End -->
       </div>
@@ -113,22 +120,36 @@
   <Footer />
 </template>
 <script>
-import { ref } from "vue";
-
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
+import axios from "axios";
 export default {
   components: {
     Navbar,
     Footer,
   },
+
+  data() {
+    return {
+      products: [],
+      category: [],
+
+      categoryName: "",
+      minPrice: 0,
+      maxPrice: 0,
+    };
+  },
+
   methods: {
-    getProducts() {
-      fetch("http://127.0.0.1:8000/api/filterProductsBYprice")
-        .then((response) => response.json())
-        .then((data) => {
-          this.products = data;
-          console.log(data);
+    filterProducts() {
+      const { minPrice, maxPrice } = this;
+
+      axios
+        .get(
+          `http://127.0.0.1:8000/api/filterProductsBYprice?min_price=${minPrice}&max_price=${maxPrice}`
+        )
+        .then((response) => {
+          this.products = response.data;
         })
         .catch((error) => {
           console.log(error);
@@ -143,7 +164,7 @@ export default {
         this.$store.commit("updateCartCount", 0);
       }
     },
-    addToCart(product) {
+    async addToCart(product) {
       const userToken = localStorage.getItem("userToken");
 
       if (!userToken) {
@@ -165,31 +186,30 @@ export default {
           // If the product is already in the cart, do nothing
           alert("Product already in cart");
         }
-        //********************************************
-        // const userToken = localStorage.getItem("userToken");
 
-        fetch("http://127.0.0.1:8000/api/cart/addproduct", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify({
-            product_id: product.id,
-            // cart_id: 1,
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
+        try {
+          const response = await axios.post(
+            "http://127.0.0.1:8000/api/cart/addproduct",
+            {
+              product_id: product.id,
+              // cart_id: 1,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userToken}`,
+              },
+            }
+          );
+          console.log(response.data);
+        } catch (error) {
+          console.log(error.message);
+        }
       }
     },
-    addToWishlist(product) {
+    async addToWishlist(product) {
       const userToken = localStorage.getItem("userToken");
+
       if (!userToken) {
         window.location.href = "/login";
         return;
@@ -197,81 +217,66 @@ export default {
         let products =
           JSON.parse(localStorage.getItem("wishlistProducts")) || [];
 
-        // Check if the product is already in the cart
+        // Check if the product is already in the wishlist
         const productIndex = products.findIndex((p) => p.id === product.id);
 
         if (productIndex === -1) {
-          // If the product is not in the cart, add it to the array
+          // If the product is not in the wishlist, add it to the array
           products.push(product);
 
           // Save the updated array to local storage
           localStorage.setItem("wishlistProducts", JSON.stringify(products));
           alert("Product added to wishlist");
         } else {
-          // If the product is already in the cart, do nothing
+          // If the product is already in the wishlist, do nothing
           alert("Product already in wishlist");
         }
 
-        fetch("http://127.0.0.1:8000/api/wishlists", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify({
-            product_id: product.id,
-          }),
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Failed to add product to wishlist");
-            } else {
-              // alert("product added succssefuly to wishlist");
+        try {
+          const response = await axios.post(
+            "http://127.0.0.1:8000/api/wishlists",
+            {
+              product_id: product.id,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userToken}`,
+              },
             }
-            return response.json();
-          })
-          .then((data) => {
-            console.log(data);
-            // Handle the response data here
-          })
-          .catch((error) => {
-            console.error(error);
-            this.error = "Failed to add product to wishlist";
-          });
+          );
+          console.log(response.data);
+          // Handle the response data here
+        } catch (error) {
+          console.error(error);
+          this.error = "Failed to add product to wishlist";
+        }
       }
     },
     viewProduct(id) {
       this.$router.push(`/products/${id}`);
     },
   },
-  data() {
-    return {
-      products: [],
-      category: [],
-      categoryName: "",
-    };
-  },
-  mounted() {
+
+  async mounted() {
     const id = this.$route.params.id;
     const params = new URLSearchParams();
     params.append("category_id", id);
-    fetch(
-      "http://localhost:8000/api/getProductByCategory?" + params.toString(),
-      {
-        method: "GET",
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        this.products = data.ProductByCategory;
-        this.category = data.getCategory;
-        this.categoryName = data.getCategory[0].name;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
 
-    ////////////////////
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/getProductByCategory?" + params.toString(),
+        {
+          method: "GET",
+        }
+      );
+      const data = response.data;
+      this.products = data.ProductByCategory;
+      this.category = data.getCategory;
+      this.categoryName = data.getCategory[50].name;
+    } catch (error) {
+      console.error(error);
+    }
   },
 };
 </script>
