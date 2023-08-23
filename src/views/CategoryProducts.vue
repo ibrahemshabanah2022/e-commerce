@@ -14,11 +14,9 @@
     </div>
   </div>
   <!-- Breadcrumb End -->
-  <v-text-field
-    placeholder="Search"
-    v-model="searchTerm"
-    @input="filterProductsSearch()"
-  ></v-text-field>
+
+  <v-text-field class="" v-model="search" label="Search"> </v-text-field>
+
   <!-- Shop Start -->
   <div class="container-fluid">
     <div class="row px-xl-5">
@@ -63,7 +61,7 @@
         <div class="row pb-3">
           <div
             class="col-lg-4 col-md-6 col-sm-6 pb-1"
-            v-for="product in products"
+            v-for="product in filterdItems"
             :key="product.id"
           >
             <div class="product-item bg-light mb-4">
@@ -136,20 +134,25 @@ export default {
   data() {
     return {
       products: [],
-      categoryId: [],
-      searchTerm: "",
+
       categoryName: "",
       minPrice: 0,
       maxPrice: 0,
-      searchTerm: "",
+      search: "",
     };
   },
-
+  computed: {
+    filterdItems: function () {
+      return this.products.filter((filteredProductsItems) => {
+        return filteredProductsItems.title.toLowerCase().match(this.search);
+      });
+    },
+  },
   methods: {
     filterProducts() {
       const id = this.$route.params.id;
       const params = new URLSearchParams();
-      const { minPrice, maxPrice, categoryId } = this;
+      const { minPrice, maxPrice } = this;
       params.append("category_id", id);
 
       axios
@@ -162,18 +165,6 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-    },
-
-    filterProductsSearch() {
-      const searchTerm = this.searchTerm;
-
-      this.filteredProducts = this.products.map((product) => {
-        return product.name.toLowerCase().includes(searchTerm.toLowerCase())
-          ? product
-          : null;
-      });
-
-      this.products = this.filteredProducts;
     },
 
     showSwal(product) {
@@ -281,6 +272,7 @@ export default {
 
   async mounted() {
     const id = this.$route.params.id;
+    this.categoryId = id;
     const params = new URLSearchParams();
     params.append("category_id", id);
 
@@ -294,9 +286,10 @@ export default {
       const data = response.data;
       this.products = data.ProductByCategory;
       this.categoryId = data.getCategory;
-      this.categoryName = data.getCategory[50].name;
+      this.categoryName = data.name;
     } catch (error) {
       console.error(error);
+      console.log(this.products);
     }
   },
 };
