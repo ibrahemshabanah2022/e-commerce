@@ -137,33 +137,33 @@ export default {
   },
 
   mounted() {
-    // const userToken = localStorage.getItem("userToken");
+    const userToken = localStorage.getItem("userToken");
 
-    // fetch("http://127.0.0.1:8000/api/cartProducts", {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${userToken}`,
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     this.products = data.products;
-    //     console.log(data);
-    //   });
+    fetch("http://127.0.0.1:8000/api/cartProducts", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        localStorage.setItem("product", JSON.stringify(data.products));
+        // Get saved products from local storage
 
-    // Get saved products from local storage
+        let products = JSON.parse(localStorage.getItem("product")) || [];
 
-    let products = JSON.parse(localStorage.getItem("product")) || [];
+        // Set the savedProducts data property to the retrieved products
+        this.savedProducts = products.map((product) => ({
+          ...product,
+          quantity: product.quantity || 1,
+        }));
 
-    // Set the savedProducts data property to the retrieved products
-    this.savedProducts = products.map((product) => ({
-      ...product,
-      quantity: product.quantity || 1,
-    }));
-
-    // Calculate the total price of the products
-    this.totalPrice = this.calculateTotalPrice(this.savedProducts);
+        // Calculate the total price of the products
+        this.totalPrice = this.calculateTotalPrice(this.savedProducts);
+        // this.products = data.products;
+        console.log(data.products);
+      });
   },
 
   methods: {
