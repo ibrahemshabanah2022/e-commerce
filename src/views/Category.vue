@@ -288,7 +288,9 @@ export default {
   },
   methods: {
     navigateToCategory(categoryId) {
-      this.$router.push(`/categoryProducts/${categoryId}`);
+      localStorage.setItem("categoryId", categoryId);
+
+      this.$router.push(`/categoryProducts`);
     },
     addToWishlist(product) {
       const userToken = localStorage.getItem("userToken");

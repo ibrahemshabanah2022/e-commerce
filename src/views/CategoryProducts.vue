@@ -6,9 +6,9 @@
     <div class="row px-xl-5">
       <div class="col-12">
         <nav class="breadcrumb bg-light mb-30">
-          <a class="breadcrumb-item text-dark" href="#">Categories</a>
+          <a class="breadcrumb-item text-dark">Categories</a>
 
-          <a class="breadcrumb-item text-dark" href="#">{{ categoryName }}</a>
+          <a class="breadcrumb-item text-dark">{{ categoryName }}</a>
         </nav>
       </div>
     </div>
@@ -24,13 +24,16 @@
       <div class="col-lg-3 col-md-4">
         <!-- Price Start -->
         <h5 class="section-title position-relative text-uppercase mb-3">
-          <span class="bg-secondary pr-3">Filter by price</span>
+          <span class="pr-3" style="background-color: #f5f5f5"
+            >Filter by price</span
+          >
         </h5>
         <div class="bg-light p-4 mb-30">
           <div
             class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
           >
             <input
+              class="border"
               type="number"
               v-model="minPrice"
               placeholder="Minimum Price"
@@ -43,6 +46,7 @@
             class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
           >
             <input
+              class="border"
               type="number"
               v-model="maxPrice"
               placeholder="Maximum Price"
@@ -50,7 +54,12 @@
 
             <span class="badge border font-weight-normal">max</span>
           </div>
-          <v-btn color="purple" @click="filterProducts()"> Filter </v-btn>
+          <v-btn
+            class="btn btn-outline-secondary bg-warning text-dark"
+            @click="filterProducts()"
+          >
+            Filter
+          </v-btn>
         </div>
         <!-- Price End -->
       </div>
@@ -135,7 +144,7 @@ export default {
     return {
       products: [],
 
-      categoryName: "",
+      categoryName: "zxzx",
       minPrice: 0,
       maxPrice: 0,
       search: "",
@@ -150,7 +159,9 @@ export default {
   },
   methods: {
     filterProducts() {
-      const id = this.$route.params.id;
+      const id = localStorage.getItem("categoryId");
+
+      // const id = this.$route.params.id;
       const params = new URLSearchParams();
       const { minPrice, maxPrice } = this;
       params.append("category_id", id);
@@ -271,8 +282,10 @@ export default {
   },
 
   async mounted() {
-    const id = this.$route.params.id;
-    this.categoryId = id;
+    const id = localStorage.getItem("categoryId");
+
+    // const id = this.$route.params.id;
+    // this.categoryId = id;
     const params = new URLSearchParams();
     params.append("category_id", id);
 
@@ -286,7 +299,7 @@ export default {
       const data = response.data;
       this.products = data.ProductByCategory;
       this.categoryId = data.getCategory;
-      this.categoryName = data.name;
+      this.categoryName = data.getCategory[0].name;
     } catch (error) {
       console.error(error);
       console.log(this.products);

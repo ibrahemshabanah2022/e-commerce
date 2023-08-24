@@ -117,7 +117,7 @@ const router = createRouter({
       component: Cart,
     },
     {
-      path: "/CategoryProducts/:id",
+      path: "/CategoryProducts",
       name: "CategoryProducts",
       component: CategoryProducts,
     },
