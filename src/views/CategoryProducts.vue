@@ -311,32 +311,6 @@ export default {
   mounted() {
     this.fetchProducts();
   },
-  // async mounted() {
-  //   const id = localStorage.getItem("categoryId");
-
-  //   // const id = this.$route.params.id;
-  //   // this.categoryId = id;
-  //   const params = new URLSearchParams();
-  //   params.append("category_id", id);
-
-  //   try {
-  //     const response = await axios.get(
-  //       "http://localhost:8000/api/getProductByCategory?" + params.toString(),
-  //       {
-  //         method: "GET",
-  //       }
-  //     );
-  //     const data = response.data;
-  //     this.products = data.ProductByCategory;
-  //     this.categoryId = data.getCategory;
-  //     this.categoryName = data.getCategory[0].name;
-  //     this.pagination.previous = data.links.previous;
-  //     this.pagination.next = data.links.next;
-  //   } catch (error) {
-  //     console.error(error);
-  //     console.log(this.products);
-  //   }
-  // },
 };
 </script>
 <style></style>
