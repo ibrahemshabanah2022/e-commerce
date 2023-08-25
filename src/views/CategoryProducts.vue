@@ -104,20 +104,25 @@
               </div>
             </div>
           </div>
-
           <div class="col-12">
             <nav>
               <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#"><span>Previous</span></a>
-                </li>
-                <li class="page-item active">
-                  <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item">
-                  <a class="page-link" href="#">Next</a>
+                  <a
+                    v-if="links.previous"
+                    @click.prevent="fetchProducts(links.previous)"
+                    class="page-link"
+                    >Previous
+                  </a>
+                </li>
+                &nbsp;
+                <li class="page-item">
+                  <a
+                    v-if="links.next"
+                    @click.prevent="fetchProducts(links.next)"
+                    class="page-link"
+                    >Next
+                  </a>
                 </li>
               </ul>
             </nav>
@@ -139,15 +144,22 @@ export default {
     Navbar,
     Footer,
   },
+  props: {
+    initialUrl: {
+      type: String,
+      default: "http://localhost:8000/api/products",
+    },
+  },
 
   data() {
     return {
       products: [],
 
-      categoryName: "zxzx",
+      categoryName: "",
       minPrice: 0,
       maxPrice: 0,
       search: "",
+      links: {},
     };
   },
   computed: {
@@ -158,6 +170,22 @@ export default {
     },
   },
   methods: {
+    fetchProducts(url) {
+      const categoryId = localStorage.getItem("categoryId");
+      const page = url ? url.split("page=")[1] : 1;
+      const urlll = `http://localhost:8000/api/getProductByCategory?category_id=${categoryId}&page=${page}`;
+      axios
+        .get(urlll)
+        .then((response) => {
+          this.products = response.data.ProductByCategory;
+          this.categoryName = response.data.getCategory[0].name;
+          this.links = response.data.links;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    ///////////////////////
     filterProducts() {
       const id = localStorage.getItem("categoryId");
 
@@ -280,31 +308,35 @@ export default {
       this.$router.push(`/products/${id}`);
     },
   },
-
-  async mounted() {
-    const id = localStorage.getItem("categoryId");
-
-    // const id = this.$route.params.id;
-    // this.categoryId = id;
-    const params = new URLSearchParams();
-    params.append("category_id", id);
-
-    try {
-      const response = await axios.get(
-        "http://localhost:8000/api/getProductByCategory?" + params.toString(),
-        {
-          method: "GET",
-        }
-      );
-      const data = response.data;
-      this.products = data.ProductByCategory;
-      this.categoryId = data.getCategory;
-      this.categoryName = data.getCategory[0].name;
-    } catch (error) {
-      console.error(error);
-      console.log(this.products);
-    }
+  mounted() {
+    this.fetchProducts();
   },
+  // async mounted() {
+  //   const id = localStorage.getItem("categoryId");
+
+  //   // const id = this.$route.params.id;
+  //   // this.categoryId = id;
+  //   const params = new URLSearchParams();
+  //   params.append("category_id", id);
+
+  //   try {
+  //     const response = await axios.get(
+  //       "http://localhost:8000/api/getProductByCategory?" + params.toString(),
+  //       {
+  //         method: "GET",
+  //       }
+  //     );
+  //     const data = response.data;
+  //     this.products = data.ProductByCategory;
+  //     this.categoryId = data.getCategory;
+  //     this.categoryName = data.getCategory[0].name;
+  //     this.pagination.previous = data.links.previous;
+  //     this.pagination.next = data.links.next;
+  //   } catch (error) {
+  //     console.error(error);
+  //     console.log(this.products);
+  //   }
+  // },
 };
 </script>
 <style></style>
