@@ -86,7 +86,7 @@
                 ></a>
                 <a
                   class="btn btn-outline-dark btn-square"
-                  @click="viewProduct(product.id, product)"
+                  @click="viewProduct(product.id)"
                   ><i class="fa fa-eye"></i
                 ></a>
               </div>
@@ -419,8 +419,10 @@ export default {
       }
     },
 
-    viewProduct(id) {
-      this.$router.push(`/products/${id}`);
+    viewProduct(ProductId) {
+      localStorage.setItem("ProductId", ProductId);
+
+      this.$router.push(`/ProductDetails`);
     },
   },
 };

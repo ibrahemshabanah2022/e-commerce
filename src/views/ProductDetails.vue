@@ -78,7 +78,7 @@
                 class="nav-item nav-link text-dark active"
                 data-toggle="tab"
                 href="#tab-pane-1"
-                >Description</a
+                >Leave a review</a
               >
 
               <a
@@ -90,20 +90,38 @@
             </div>
             <div class="tab-content">
               <div class="tab-pane fade show active" id="tab-pane-1">
-                <h4 class="mb-3">Product Description</h4>
-                <p>
-                  {{ product.description }}
-                </p>
+                <label for="message">Your Review *</label>
+                <form @submit.prevent="createComment">
+                  <div>
+                    <textarea
+                      id="message"
+                      cols="30"
+                      rows="5"
+                      class="form-control"
+                      v-model="commentContent"
+                    ></textarea>
+                  </div>
+                  <br />
+                  <div>
+                    <button class="btn btn-primary px-3" type="submit">
+                      Leave Your Review
+                    </button>
+                  </div>
+                </form>
               </div>
 
               <div class="tab-pane fade" id="tab-pane-3">
                 <div class="row">
                   <div class="col-md-6">
                     <!-- <h4 class="mb-4">1 review for "Product Name"</h4> -->
-                    <div class="media mb-4">
+                    <div
+                      class="media mb-4"
+                      v-for="comment in comments"
+                      :key="comment.id"
+                    >
                       <div class="media-body">
                         <h6>
-                          John Doe<small> - <i>01 Jan 2045</i></small>
+                          {{ comment.user.name }}
                         </h6>
                         <!-- <div class="text-primary mb-2">
                           <i class="fas fa-star"></i>
@@ -112,55 +130,13 @@
                           <i class="fas fa-star-half-alt"></i>
                           <i class="far fa-star"></i>
                         </div> -->
-                        <p>
-                          Diam amet duo labore stet elitr ea clita ipsum, tempor
-                          labore accusam ipsum et no at. Kasd diam tempor rebum
-                          magna dolores sed sed eirmod ipsum.
-                        </p>
+                        <div>
+                          <p>
+                            {{ comment.content }}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-md-6">
-                    <h4 class="mb-4">Leave a review</h4>
-
-                    <!-- <div class="d-flex my-3">
-                      <p class="mb-0 mr-2">Your Rating * :</p>
-                      <div class="text-primary">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                      </div>
-                    </div> -->
-                    <form>
-                      <div class="form-group">
-                        <label for="message">Your Review *</label>
-                        <form @submit.prevent="createComment">
-                          <div>
-                            <textarea
-                              id="message"
-                              cols="30"
-                              rows="5"
-                              class="form-control"
-                              v-model="commentContent"
-                            ></textarea>
-                          </div>
-                          <br />
-                          <div>
-                            <button class="btn btn-primary px-3" type="submit">
-                              Leave Your Review
-                            </button>
-                          </div>
-                        </form>
-                        <!-- <textarea
-                          id="message"
-                          cols="30"
-                          rows="5"
-                          class="form-control"
-                        ></textarea> -->
-                      </div>
-                    </form>
                   </div>
                 </div>
               </div>
@@ -186,21 +162,37 @@ export default {
   },
   data() {
     return {
+      comments: [],
+
       product: {},
       commentContent: "",
     };
   },
   mounted() {
-    const id = this.$route.params.id;
-    fetch(`http://localhost:8000/api/products/${id}`)
+    // const categoryId = localStorage.getItem("ProductId");
+    const ProductId = localStorage.getItem("ProductId");
+
+    // const id = this.$route.params.id;
+    fetch(`http://localhost:8000/api/products/${ProductId}`)
       .then((response) => response.json())
       .then((d) => {
         this.product = d;
       });
+    ///////////////////////
+
+    axios
+      .get(`http://127.0.0.1:8000/api/getComments?product_id=${ProductId}`)
+      .then((response) => {
+        this.comments = response.data.comments;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   },
+
   methods: {
     createComment() {
-      const id = this.$route.params.id;
+      const id = localStorage.getItem("ProductId");
 
       const userToken = localStorage.getItem("userToken");
 
@@ -215,14 +207,10 @@ export default {
           product_id: id,
         }),
       })
-        // axios
-        //   .post("http://localhost:8000/api/PostComment", {
-        //     content: this.commentContent,
-        //     product_id: id,
-        //   })
         .then((response) => {
           console.log(response.data);
           // handle success response
+          location.reload(); // reload the page
         })
         .catch((error) => {
           console.log(error);
