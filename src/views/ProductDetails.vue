@@ -75,41 +75,19 @@
           <div class="bg-light p-30">
             <div class="nav nav-tabs mb-4">
               <a
+                class="nav-item nav-link text-dark"
+                data-toggle="tab"
+                href="#tab-pane-3"
+                >Product Reviews
+              </a>
+              <a
                 class="nav-item nav-link text-dark active"
                 data-toggle="tab"
                 href="#tab-pane-1"
                 >Leave a review</a
               >
-
-              <a
-                class="nav-item nav-link text-dark"
-                data-toggle="tab"
-                href="#tab-pane-3"
-                >Reviews
-              </a>
             </div>
             <div class="tab-content">
-              <div class="tab-pane fade show active" id="tab-pane-1">
-                <label for="message">Your Review *</label>
-                <form @submit.prevent="createComment">
-                  <div>
-                    <textarea
-                      id="message"
-                      cols="30"
-                      rows="5"
-                      class="form-control"
-                      v-model="commentContent"
-                    ></textarea>
-                  </div>
-                  <br />
-                  <div>
-                    <button class="btn btn-primary px-3" type="submit">
-                      Leave Your Review
-                    </button>
-                  </div>
-                </form>
-              </div>
-
               <div class="tab-pane fade" id="tab-pane-3">
                 <div class="row">
                   <div class="col-md-6">
@@ -139,6 +117,26 @@
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="tab-pane fade show active" id="tab-pane-1">
+                <label for="message">Your Review *</label>
+                <form @submit.prevent="createComment">
+                  <div>
+                    <textarea
+                      id="message"
+                      cols="30"
+                      rows="5"
+                      class="form-control"
+                      v-model="commentContent"
+                    ></textarea>
+                  </div>
+                  <br />
+                  <div>
+                    <button class="btn btn-primary px-3" type="submit">
+                      Leave Your Review
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

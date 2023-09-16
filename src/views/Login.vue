@@ -27,16 +27,14 @@
           placeholder="Password"
         />
       </div>
-      <div class="form-group form-check">
-        <input
-          v-model="rememberMe"
-          type="checkbox"
-          class="form-check-input"
-          id="exampleCheck1"
-        />
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="form-group form-check"></div>
+      <button type="submit" class="btn btn-primary">Submit</button
+      ><a
+        style="margin: 30px"
+        class="btn btn-primary"
+        href="http://localhost:5174/#/auth/login"
+        ><label class="form-check-label">Login as Admin</label></a
+      >
     </form>
   </div>
   <Footer />
@@ -74,37 +72,22 @@ export default {
         const data = await response.json();
         if (response.ok) {
           localStorage.setItem("userToken", data.token);
-          window.location.href = "/"; // redirect to home page
+          localStorage.setItem("UserRole", data.user.role);
+          const userRole = localStorage.getItem("UserRole");
+          // const userToken = localStorage.getItem("userToken");
+
+          if (userRole === "admin") {
+            window.location.href = `http://localhost:5174/#/`;
+          } else {
+            window.location.href = "/"; // redirect to home page
+          }
         } else {
           alert("Login failed. Please check your credentials and try again.");
-
-          // const errorElement = document.createElement("div");
-          // errorElement.textContent = data.message;
-          // document.body.appendChild(errorElement);
         }
       } catch (error) {
         console.error(error);
       }
     },
-    // async submitForm() {
-    //   try {
-    //     const response = await fetch("http://127.0.0.1:8000/api/login", {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //         email: this.email,
-    //         password: this.password,
-    //         rememberMe: this.rememberMe,
-    //       }),
-    //     });
-    //     const data = await response.json();
-    //     console.log(data);
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // },
   },
 };
 </script>

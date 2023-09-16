@@ -1,6 +1,6 @@
 <template>
   <AdminSidebar />
-  <section class="home">
+  <div class="col py-3">
     <div class="text">Products</div>
 
     <div class="container-fluid">
@@ -65,7 +65,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
