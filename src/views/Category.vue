@@ -71,7 +71,11 @@
         >
           <div class="product-item bg-light mb-4">
             <div class="product-img position-relative overflow-hidden">
-              <img class="img-fluid w-100" :src="product.image" alt="" />
+              <img
+                class="img-fluid w-100"
+                :src="`http://localhost:8000/${product.image}`"
+                alt=""
+              />
               <div class="product-action">
                 <a
                   v-on:click="showSwal(product)"
@@ -182,6 +186,8 @@ export default {
     };
   },
   setup(props) {
+    const searchTerm = ref("");
+
     const breakpoints = {
       // Set breakpoints for medium and small screens
       320: {
@@ -209,6 +215,7 @@ export default {
       previous: null,
       next: null,
     });
+
     const fetchCategories = async () => {
       const response = await fetch("http://localhost:8000/api/category");
       const data = await response.json();
@@ -268,10 +275,12 @@ export default {
     onMounted(() => {
       fetchCategories();
       fetchProducts();
-      searchProducts();
+      // searchProducts();
     });
 
     return {
+      searchTerm,
+
       handleNextClick,
       handlePreviousClick,
       fetchProducts,
@@ -282,6 +291,7 @@ export default {
       filterProducts,
       onSwiper,
       onSlideChange,
+      searchProducts,
 
       modules: [Navigation, Pagination, Scrollbar, A11y],
     };
