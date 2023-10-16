@@ -10,7 +10,7 @@
             <div class="carousel-item active">
               <img
                 class="card-img-top"
-                :src="`http://localhost:8000/${product.image}`"
+                :src="`https://e-commerce-api-production-1c29.up.railway.app/${product.image}`"
                 alt=""
               />
             </div>

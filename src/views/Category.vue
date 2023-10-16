@@ -25,7 +25,7 @@
         <a class="text-decoration-none">
           <img
             class="img-fluid"
-            :src="category.image"
+            :src="`http://localhost:8000/${category.image}`"
             alt=""
             style="width: 350px; height: 150px"
           />
