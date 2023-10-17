@@ -25,7 +25,7 @@
             >
               <img
                 class="position-absolute w-100 h-100"
-                src="img/carousel-1.jpg"
+                src="/img/carousel-1.jpg"
                 style="object-fit: cover"
               />
               <div
@@ -48,7 +48,7 @@
             <div class="carousel-item position-relative" style="height: 430px">
               <img
                 class="position-absolute w-100 h-100"
-                src="img/carousel-2.jpg"
+                src="/img/carousel-2.jpg"
                 style="object-fit: cover"
               />
               <div
@@ -71,7 +71,7 @@
             <div class="carousel-item position-relative" style="height: 430px">
               <img
                 class="position-absolute w-100 h-100"
-                src="img/carousel-3.jpg"
+                src="/img/carousel-3.jpg"
                 style="object-fit: cover"
               />
               <div
@@ -97,7 +97,7 @@
 
       <div class="col-lg-4">
         <div class="product-offer mb-30" style="height: 200px">
-          <img class="img-fluid" src="img/offer-1.jpg" alt="" />
+          <img class="img-fluid" src="/img/offer-1.jpg" alt="" />
           <div class="offer-text">
             <h6 class="text-white text-uppercase">Save 20%</h6>
             <h3 class="text-white mb-3">Special Offer</h3>
@@ -107,7 +107,7 @@
           </div>
         </div>
         <div class="product-offer mb-30" style="height: 200px">
-          <img class="img-fluid" src="img/offer-2.jpg" alt="" />
+          <img class="img-fluid" src="/img/offer-2.jpg" alt="" />
           <div class="offer-text">
             <h6 class="text-white text-uppercase">Save 20%</h6>
             <h3 class="text-white mb-3">Special Offer</h3>
@@ -138,7 +138,7 @@
     <div class="row px-xl-5">
       <div class="col-md-6">
         <div class="product-offer mb-30" style="height: 300px">
-          <img class="img-fluid" src="img/offer-1.jpg" alt="" />
+          <img class="img-fluid" src="/img/offer-1.jpg" alt="" />
 
           <div class="offer-text">
             <h6 class="text-white text-uppercase">Save 20%</h6>
@@ -148,7 +148,7 @@
       </div>
       <div class="col-md-6">
         <div class="product-offer mb-30" style="height: 300px">
-          <img class="img-fluid" src="img/offer-2.jpg" alt="" />
+          <img class="img-fluid" src="/img/offer-2.jpg" alt="" />
           <div class="offer-text">
             <h6 class="text-white text-uppercase">Save 20%</h6>
             <h3 class="text-white mb-3">Special Offer</h3>
