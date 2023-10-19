@@ -58,17 +58,20 @@ export default {
   methods: {
     async submitForm() {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: this.email,
-            password: this.password,
-            rememberMe: this.rememberMe,
-          }),
-        });
+        const response = await fetch(
+          "https://e-commerce-api-production-1c29.up.railway.app/api/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: this.email,
+              password: this.password,
+              rememberMe: this.rememberMe,
+            }),
+          }
+        );
         const data = await response.json();
         if (response.ok) {
           localStorage.setItem("userToken", data.token);

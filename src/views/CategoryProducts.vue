@@ -77,7 +77,7 @@
               <div class="product-img position-relative overflow-hidden">
                 <img
                   class="img-fluid w-100"
-                  :src="`http://localhost:8000/${product.image}`"
+                  :src="`https://e-commerce-api-production-1c29.up.railway.app/${product.image}`"
                   alt=""
                 />
                 <div class="product-action"></div>
@@ -151,7 +151,8 @@ export default {
   props: {
     initialUrl: {
       type: String,
-      default: "http://localhost:8000/api/products",
+      default:
+        "https://e-commerce-api-production-1c29.up.railway.app/api/products",
     },
   },
 
@@ -177,7 +178,7 @@ export default {
     fetchProducts(url) {
       const categoryId = localStorage.getItem("categoryId");
       const page = url ? url.split("page=")[1] : 1;
-      const urlll = `http://localhost:8000/api/getProductByCategory?category_id=${categoryId}&page=${page}`;
+      const urlll = `https://e-commerce-api-production-1c29.up.railway.app/api/getProductByCategory?category_id=${categoryId}&page=${page}`;
       axios
         .get(urlll)
         .then((response) => {
@@ -200,7 +201,7 @@ export default {
 
       axios
         .get(
-          `http://127.0.0.1:8000/api/filterProductsBYprice?min_price=${minPrice}&max_price=${maxPrice}&category_id=${id}`
+          `https://e-commerce-api-production-1c29.up.railway.app/api/filterProductsBYprice?min_price=${minPrice}&max_price=${maxPrice}&category_id=${id}`
         )
         .then((response) => {
           this.products = response.data;
@@ -244,7 +245,7 @@ export default {
 
         try {
           const response = await axios.post(
-            "http://127.0.0.1:8000/api/cart/addproduct",
+            "https://e-commerce-api-production-1c29.up.railway.app/api/cart/addproduct",
             {
               product_id: product.id,
               // cart_id: 1,
@@ -289,7 +290,7 @@ export default {
 
         try {
           const response = await axios.post(
-            "http://127.0.0.1:8000/api/wishlists",
+            "https://e-commerce-api-production-1c29.up.railway.app/api/wishlists",
             {
               product_id: product.id,
             },

@@ -5,7 +5,7 @@
 <script>
 export default {
   mounted() {
-    fetch("http://localhost:8000/api/success", {
+    fetch("https://e-commerce-api-production-1c29.up.railway.app/api/success", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

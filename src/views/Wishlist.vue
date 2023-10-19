@@ -100,16 +100,19 @@ export default {
       // 88888888888888888888888888888888888888888888
       const userToken = localStorage.getItem("userToken");
 
-      fetch("http://127.0.0.1:8000/api/destroy", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${userToken}`,
-        },
-        body: JSON.stringify({
-          product_id: productId,
-        }),
-      })
+      fetch(
+        "https://e-commerce-api-production-1c29.up.railway.app/api/destroy",
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+          body: JSON.stringify({
+            product_id: productId,
+          }),
+        }
+      )
         .then((response) => {
           if (response.ok) {
             // Product was removed from the cart
@@ -158,17 +161,20 @@ export default {
         //********************************************
         // const userToken = localStorage.getItem("userToken");
 
-        fetch("http://127.0.0.1:8000/api/cart/addproduct", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify({
-            product_id: product.id,
-            // cart_id: 1,
-          }),
-        })
+        fetch(
+          "https://e-commerce-api-production-1c29.up.railway.app/api/cart/addproduct",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify({
+              product_id: product.id,
+              // cart_id: 1,
+            }),
+          }
+        )
           .then((response) => response.json())
           .then((data) => {
             console.log(data);

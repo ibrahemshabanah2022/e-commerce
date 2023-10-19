@@ -25,7 +25,7 @@
         <a class="text-decoration-none">
           <img
             class="img-fluid"
-            :src="`http://localhost:8000/${category.image}`"
+            :src="category.image"
             alt=""
             style="width: 350px; height: 150px"
           />
@@ -71,11 +71,7 @@
         >
           <div class="product-item bg-light mb-4">
             <div class="product-img position-relative overflow-hidden">
-              <img
-                class="img-fluid w-100"
-                :src="`http://localhost:8000/${product.image}`"
-                alt=""
-              />
+              <img class="img-fluid w-100" :src="product.image" alt="" />
               <div class="product-action">
                 <a
                   v-on:click="showSwal(product)"
@@ -172,7 +168,8 @@ export default {
   props: {
     initialUrl: {
       type: String,
-      default: "http://localhost:8000/api/products",
+      default:
+        "https://e-commerce-api-production-1c29.up.railway.app/api/products",
     },
   },
   components: {
@@ -217,13 +214,15 @@ export default {
     });
 
     const fetchCategories = async () => {
-      const response = await fetch("http://localhost:8000/api/category");
+      const response = await fetch(
+        "https://e-commerce-api-production-1c29.up.railway.app/api/category"
+      );
       const data = await response.json();
       categories.value = data.categories;
     };
 
     // const fetchProducts = async () => {
-    //   const response = await fetch("http://localhost:8000/api/products");
+    //   const response = await fetch("https://e-commerce-api-production-1c29.up.railway.app/api/products");
     //   const data = await response.json();
     //   products.value = data.data;
     //   pagination.value.previous = data.links.previous;
@@ -255,7 +254,9 @@ export default {
     // };
 
     const filterProducts = async (categoryId) => {
-      const response = await fetch(`http://localhost:8000/api/products`);
+      const response = await fetch(
+        `https://e-commerce-api-production-1c29.up.railway.app/api/products`
+      );
       const data = await response.json();
       const filteredProducts = data.data.filter(
         (product) => product.category_id == categoryId
@@ -264,7 +265,9 @@ export default {
     };
 
     const searchProducts = async () => {
-      const response = await fetch(`http://localhost:8000/api/products`);
+      const response = await fetch(
+        `https://e-commerce-api-production-1c29.up.railway.app/api/products`
+      );
       const data = await response.json();
       const filteredProduct = data.data.filter(
         (product) => product.title === searchTerm.value
@@ -326,16 +329,19 @@ export default {
           alert("Product already in wishlist");
         }
 
-        fetch("http://127.0.0.1:8000/api/wishlists", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify({
-            product_id: product.id,
-          }),
-        })
+        fetch(
+          "https://e-commerce-api-production-1c29.up.railway.app/api/wishlists",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify({
+              product_id: product.id,
+            }),
+          }
+        )
           .then((response) => {
             if (!response.ok) {
               throw new Error("Failed to add product to wishlist");
@@ -379,17 +385,20 @@ export default {
         //********************************************
         // const userToken = localStorage.getItem("userToken");
 
-        fetch("http://127.0.0.1:8000/api/cart/addproduct", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify({
-            product_id: product.id,
-            // cart_id: 1,
-          }),
-        })
+        fetch(
+          "https://e-commerce-api-production-1c29.up.railway.app/api/cart/addproduct",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify({
+              product_id: product.id,
+              // cart_id: 1,
+            }),
+          }
+        )
           .then((response) => response.json())
           .then((data) => {
             console.log(data);

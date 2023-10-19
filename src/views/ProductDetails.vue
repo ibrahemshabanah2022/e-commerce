@@ -175,7 +175,9 @@ export default {
     const ProductId = localStorage.getItem("ProductId");
 
     // const id = this.$route.params.id;
-    fetch(`http://localhost:8000/api/products/${ProductId}`)
+    fetch(
+      `https://e-commerce-api-production-1c29.up.railway.app/api/products/${ProductId}`
+    )
       .then((response) => response.json())
       .then((d) => {
         this.product = d;
@@ -183,7 +185,9 @@ export default {
     ///////////////////////
 
     axios
-      .get(`http://127.0.0.1:8000/api/getComments?product_id=${ProductId}`)
+      .get(
+        `https://e-commerce-api-production-1c29.up.railway.app/api/getComments?product_id=${ProductId}`
+      )
       .then((response) => {
         this.comments = response.data.comments;
       })
@@ -198,17 +202,20 @@ export default {
 
       const userToken = localStorage.getItem("userToken");
 
-      fetch("http://localhost:8000/api/PostComment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${userToken}`,
-        },
-        body: JSON.stringify({
-          content: this.commentContent,
-          product_id: id,
-        }),
-      })
+      fetch(
+        "https://e-commerce-api-production-1c29.up.railway.app/api/PostComment",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+          body: JSON.stringify({
+            content: this.commentContent,
+            product_id: id,
+          }),
+        }
+      )
         .then((response) => {
           console.log(response.data);
           // handle success response
