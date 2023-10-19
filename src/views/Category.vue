@@ -364,8 +364,7 @@ export default {
       const userToken = localStorage.getItem("userToken");
 
       if (!userToken) {
-        window.location.href =
-          "https://glistening-torrone-f19804.netlify.app/login";
+        window.location.href = "/login";
         return;
       } else {
         let products = JSON.parse(localStorage.getItem("product")) || [];
