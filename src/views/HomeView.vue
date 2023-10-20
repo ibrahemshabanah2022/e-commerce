@@ -25,7 +25,7 @@
             >
               <img
                 class="position-absolute w-100 h-100"
-                src="/img/carousel-1.jpg"
+                src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 style="object-fit: cover"
               />
               <div
@@ -36,19 +36,15 @@
                   <h1
                     class="display-4 text-white mb-3 animate__animated animate__fadeInDown"
                   >
-                    Men Fashion
+                    SMART PHONES
                   </h1>
-                  <p class="mx-md-5 px-5 animate__animated animate__bounceIn">
-                    Lorem rebum magna amet lorem magna erat diam stet. Sadips
-                    duo stet amet amet ndiam elitr ipsum diam
-                  </p>
                 </div>
               </div>
             </div>
             <div class="carousel-item position-relative" style="height: 430px">
               <img
                 class="position-absolute w-100 h-100"
-                src="/img/carousel-2.jpg"
+                src="https://images.pexels.com/photos/682933/pexels-photo-682933.jpeg?auto=compress&cs=tinysrgb&w=600"
                 style="object-fit: cover"
               />
               <div
@@ -59,19 +55,15 @@
                   <h1
                     class="display-4 text-white mb-3 animate__animated animate__fadeInDown"
                   >
-                    Women Fashion
+                    DIGITAL GAMES
                   </h1>
-                  <p class="mx-md-5 px-5 animate__animated animate__bounceIn">
-                    Lorem rebum magna amet lorem magna erat diam stet. Sadips
-                    duo stet amet amet ndiam elitr ipsum diam
-                  </p>
                 </div>
               </div>
             </div>
             <div class="carousel-item position-relative" style="height: 430px">
               <img
                 class="position-absolute w-100 h-100"
-                src="/img/carousel-3.jpg"
+                src="https://media.istockphoto.com/id/1435610171/photo/gamer-computer-desktop-with-rgb-lights-on-the-background-modern-pc-computer-white-screen.jpg?s=612x612&w=0&k=20&c=mfhI1f-7twoSVUHXvApi-th3UczNM25H_3VoAbri3gk="
                 style="object-fit: cover"
               />
               <div
@@ -82,12 +74,8 @@
                   <h1
                     class="display-4 text-white mb-3 animate__animated animate__fadeInDown"
                   >
-                    Kids Fashion
+                    COMPUTERS
                   </h1>
-                  <p class="mx-md-5 px-5 animate__animated animate__bounceIn">
-                    Lorem rebum magna amet lorem magna erat diam stet. Sadips
-                    duo stet amet amet ndiam elitr ipsum diam
-                  </p>
                 </div>
               </div>
             </div>
@@ -97,7 +85,11 @@
 
       <div class="col-lg-4">
         <div class="product-offer mb-30" style="height: 200px">
-          <img class="img-fluid" src="/img/offer-1.jpg" alt="" />
+          <img
+            class="img-fluid"
+            src="https://images.pexels.com/photos/7319108/pexels-photo-7319108.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+            alt=""
+          />
           <div class="offer-text">
             <h6 class="text-white text-uppercase">Save 20%</h6>
             <h3 class="text-white mb-3">Special Offer</h3>
@@ -107,7 +99,11 @@
           </div>
         </div>
         <div class="product-offer mb-30" style="height: 200px">
-          <img class="img-fluid" src="/img/offer-2.jpg" alt="" />
+          <img
+            class="img-fluid"
+            src="https://images.pexels.com/photos/4127632/pexels-photo-4127632.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+            alt=""
+          />
           <div class="offer-text">
             <h6 class="text-white text-uppercase">Save 20%</h6>
             <h3 class="text-white mb-3">Special Offer</h3>

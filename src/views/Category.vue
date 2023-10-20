@@ -27,7 +27,7 @@
             class="img-fluid"
             :src="category.image"
             alt=""
-            style="width: 350px; height: 150px"
+            style="width: 200px; height: 100px"
           />
           <div class="container text-center cursor-pointer">
             {{ category.name }}
@@ -37,6 +37,16 @@
         </a>
       </swiper-slide>
     </swiper>
+  </div>
+  <br />
+  <div class="col-lg-12">
+    <div class="mb-30" style="height: 500px">
+      <img
+        class="img-fluid"
+        src="https://dream2000.com/media/wysiwyg/smartwave/porto/Test/anker-EN_2.jpg"
+        alt=""
+      />
+    </div>
   </div>
   <div class="container-fluid pt-5 pb-3">
     <h2
@@ -72,7 +82,7 @@
           <div class="product-item bg-light mb-4">
             <div class="product-img position-relative overflow-hidden">
               <img class="img-fluid w-100" :src="product.image" alt="" />
-              <div class="product-action">
+              <!-- <div class="product-action">
                 <a
                   v-on:click="showSwal(product)"
                   class="btn btn-outline-dark btn-square"
@@ -89,7 +99,7 @@
                   @click="viewProduct(product.id)"
                   ><i class="fa fa-eye"></i
                 ></a>
-              </div>
+              </div> -->
             </div>
             <div class="text-center py-4">
               <a class="h6 text-decoration-none text-truncate" href="">{{
@@ -99,6 +109,18 @@
                 class="d-flex align-items-center justify-content-center mt-2"
               >
                 <h5>{{ product.price }}$</h5>
+                <a
+                  v-on:click="showSwal(product)"
+                  class="btn btn-square"
+                  @click="addToCart(product)"
+                  ><i class="fa fa-shopping-cart"></i
+                ></a>
+                <a class="btn btn-square" @click="addToWishlist(product)"
+                  ><i class="far fa-heart"></i
+                ></a>
+                <a class="btn btn-square" @click="viewProduct(product.id)"
+                  ><i class="fa fa-eye"></i
+                ></a>
               </div>
             </div>
           </div>
