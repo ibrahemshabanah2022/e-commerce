@@ -386,7 +386,9 @@ export default {
       const userToken = localStorage.getItem("userToken");
 
       if (!userToken) {
-        window.location.href = "/login";
+        this.$router.push("/login");
+
+        // window.location.href = "/login";
         return;
       } else {
         let products = JSON.parse(localStorage.getItem("product")) || [];
