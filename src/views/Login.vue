@@ -80,12 +80,8 @@ export default {
           // const userToken = localStorage.getItem("userToken");
 
           if (userRole === "admin") {
-            window.location.href = `http://localhost:5174/#/`;
-          } else {
-            window.location.href = "/"; // redirect to home page
+            alert("Login failed. Please check your credentials and try again.");
           }
-        } else {
-          alert("Login failed. Please check your credentials and try again.");
         }
       } catch (error) {
         console.error(error);
