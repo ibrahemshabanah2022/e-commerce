@@ -24,10 +24,10 @@
       >
         <a class="text-decoration-none">
           <img
-            class="img-fluid"
+            class="img-fluid mx-auto d-block"
             :src="category.image"
             alt=""
-            style="width: 200px; height: 100px"
+            style="width: 150px; height: 100px"
           />
           <div class="container text-center cursor-pointer">
             {{ category.name }}
@@ -40,7 +40,7 @@
   </div>
   <br />
   <div class="col-lg-12">
-    <div class="mb-30" style="height: 500px">
+    <div class="mb-30" style="height: 400px">
       <img
         class="img-fluid"
         src="https://dream2000.com/media/wysiwyg/smartwave/porto/Test/anker-EN_2.jpg"
