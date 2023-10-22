@@ -75,11 +75,7 @@
           >
             <div class="product-item bg-light mb-4">
               <div class="product-img position-relative overflow-hidden">
-                <img
-                  class="img-fluid w-100"
-                  :src="`https://e-commerce-api-production-1c29.up.railway.app/${product.image}`"
-                  alt=""
-                />
+                <img class="img-fluid w-100" :src="product.image" alt="" />
                 <div class="product-action"></div>
               </div>
               <div class="text-center py-4">
@@ -309,8 +305,10 @@ export default {
         }
       }
     },
-    viewProduct(id) {
-      this.$router.push(`/products/${id}`);
+    viewProduct(ProductId) {
+      localStorage.setItem("ProductId", ProductId);
+
+      this.$router.push(`/ProductDetails`);
     },
   },
   mounted() {
