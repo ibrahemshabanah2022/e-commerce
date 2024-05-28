@@ -282,12 +282,29 @@ export default {
     };
 
     const searchProducts = async () => {
-      const response = await fetch(`http://127.0.0.1:8000/api/products`);
-      const data = await response.json();
-      const filteredProduct = data.data.filter(
-        (product) => product.title === searchTerm.value
-      );
-      products.value = filteredProduct;
+      try {
+        const searchTermValue = searchTerm.value.toLowerCase(); // Convert to lowercase for case-insensitive search
+        const response = await fetch(`http://127.0.0.1:8000/api/products`);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+
+        const data = await response.json();
+        const filteredProduct = data.data.filter(
+          (product) => product.title.toLowerCase() === searchTermValue
+        );
+
+        if (filteredProduct.length === 0) {
+          console.log("No products found matching the search term");
+          // Handle no match found scenario, like displaying a message to the user
+        }
+
+        products.value = filteredProduct;
+      } catch (error) {
+        console.error("Error fetching or filtering products:", error.message);
+        // Handle error, like displaying an error message to the user
+      }
     };
 
     onMounted(() => {

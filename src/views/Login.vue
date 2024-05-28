@@ -32,7 +32,7 @@
       ><a
         style="margin: 30px"
         class="btn btn-primary"
-        href="http://localhost:5174/#/auth/login"
+        href="https://elegant-starburst-8966d7.netlify.app/#/auth/login"
         ><label class="form-check-label">Login as Admin</label></a
       >
     </form>
