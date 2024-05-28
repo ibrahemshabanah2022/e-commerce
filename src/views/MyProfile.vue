@@ -153,14 +153,11 @@ export default {
       }
     },
     fetchUserData() {
-      fetch(
-        "https://e-commerce-api-production-1c29.up.railway.app/api/authuser",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-          },
-        }
-      )
+      fetch("http://127.0.0.1:8000/api/authuser", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
+      })
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -182,21 +179,18 @@ export default {
         alert("Passwords do not match");
         return;
       }
-      fetch(
-        "https://e-commerce-api-production-1c29.up.railway.app/api/updatecustomer",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-          },
-          body: JSON.stringify({
-            name: this.userName,
-            email: this.userEmail,
-            password: this.userPassword,
-          }),
-        }
-      )
+      fetch("http://127.0.0.1:8000/api/updatecustomer", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
+        body: JSON.stringify({
+          name: this.userName,
+          email: this.userEmail,
+          password: this.userPassword,
+        }),
+      })
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");

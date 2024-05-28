@@ -147,8 +147,7 @@ export default {
   props: {
     initialUrl: {
       type: String,
-      default:
-        "https://e-commerce-api-production-1c29.up.railway.app/api/products",
+      default: "http://127.0.0.1:8000/api/products",
     },
   },
 
@@ -174,7 +173,7 @@ export default {
     fetchProducts(url) {
       const categoryId = localStorage.getItem("categoryId");
       const page = url ? url.split("page=")[1] : 1;
-      const urlll = `https://e-commerce-api-production-1c29.up.railway.app/api/getProductByCategory?category_id=${categoryId}&page=${page}`;
+      const urlll = `http://127.0.0.1:8000/api/getProductByCategory?category_id=${categoryId}&page=${page}`;
       axios
         .get(urlll)
         .then((response) => {
@@ -197,7 +196,7 @@ export default {
 
       axios
         .get(
-          `https://e-commerce-api-production-1c29.up.railway.app/api/filterProductsBYprice?min_price=${minPrice}&max_price=${maxPrice}&category_id=${id}`
+          `http://127.0.0.1:8000/api/filterProductsBYprice?min_price=${minPrice}&max_price=${maxPrice}&category_id=${id}`
         )
         .then((response) => {
           this.products = response.data;
@@ -241,7 +240,7 @@ export default {
 
         try {
           const response = await axios.post(
-            "https://e-commerce-api-production-1c29.up.railway.app/api/cart/addproduct",
+            "http://127.0.0.1:8000/api/cart/addproduct",
             {
               product_id: product.id,
               // cart_id: 1,
@@ -286,7 +285,7 @@ export default {
 
         try {
           const response = await axios.post(
-            "https://e-commerce-api-production-1c29.up.railway.app/api/wishlists",
+            "http://127.0.0.1:8000/api/wishlists",
             {
               product_id: product.id,
             },

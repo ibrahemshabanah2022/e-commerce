@@ -105,16 +105,13 @@ export default {
       const userToken = localStorage.getItem("userToken");
 
       // Make a DELETE request to the API to delete the user's products
-      fetch(
-        "https://e-commerce-api-production-1c29.up.railway.app/api/deleteProducts",
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      )
+      fetch("http://127.0.0.1:8000/api/deleteProducts", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
@@ -124,15 +121,12 @@ export default {
         });
 
       // Make a POST request to the API to log out the user
-      fetch(
-        "https://e-commerce-api-production-1c29.up.railway.app/api/logout",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      )
+      fetch("http://127.0.0.1:8000/api/logout", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);

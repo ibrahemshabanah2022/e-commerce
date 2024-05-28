@@ -139,16 +139,13 @@ export default {
   mounted() {
     const userToken = localStorage.getItem("userToken");
 
-    fetch(
-      "https://e-commerce-api-production-1c29.up.railway.app/api/cartProducts",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${userToken}`,
-        },
-      }
-    )
+    fetch("http://127.0.0.1:8000/api/cartProducts", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         localStorage.setItem("product", JSON.stringify(data.products));
@@ -173,17 +170,14 @@ export default {
     submitForm() {
       const userToken = localStorage.getItem("userToken");
 
-      fetch(
-        "https://e-commerce-api-production-1c29.up.railway.app/api/checkout",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-          // body: JSON.stringify(this.formData)
-        }
-      )
+      fetch("http://127.0.0.1:8000/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        // body: JSON.stringify(this.formData)
+      })
         .then((response) => response.json())
         .then((data) => {
           // handle response data here
@@ -210,18 +204,15 @@ export default {
       this.totalPrice = this.calculateTotalPrice(this.savedProducts);
       localStorage.setItem("product", JSON.stringify(this.savedProducts));
 
-      fetch(
-        "https://e-commerce-api-production-1c29.up.railway.app/api/cart/increase-quantity",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: product.id,
-          }),
-        }
-      );
+      fetch("http://127.0.0.1:8000/api/cart/increase-quantity", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: product.id,
+        }),
+      });
     },
 
     decrementQuantity(product) {
@@ -231,18 +222,15 @@ export default {
         localStorage.setItem("product", JSON.stringify(this.savedProducts));
       }
 
-      fetch(
-        "https://e-commerce-api-production-1c29.up.railway.app/api/cart/decrease-quantity",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: product.id,
-          }),
-        }
-      );
+      fetch("http://127.0.0.1:8000/api/cart/decrease-quantity", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: product.id,
+        }),
+      });
     },
 
     removeProduct(productId) {
@@ -264,19 +252,16 @@ export default {
       // this.showSwal({ id: productId });
       const userToken = localStorage.getItem("userToken");
 
-      fetch(
-        "https://e-commerce-api-production-1c29.up.railway.app/api/cart/deleteproduct",
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify({
-            cart_product_id: productId,
-          }),
-        }
-      )
+      fetch("http://127.0.0.1:8000/api/cart/deleteproduct", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify({
+          cart_product_id: productId,
+        }),
+      })
         .then((response) => {
           if (response.ok) {
             // Product was removed from the cart
