@@ -43,7 +43,7 @@
     <div class="mb-30" style="height: 400px">
       <img
         class="img-fluid"
-        src="https://dream2000.com/media/wysiwyg/smartwave/porto/Test/anker-EN_2.jpg"
+        src="https://www.internetcreation.net/wp-content/uploads/2015/04/banner-e-commerce1.png"
         alt=""
       />
     </div>
