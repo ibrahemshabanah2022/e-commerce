@@ -75,6 +75,7 @@ export default {
           localStorage.setItem("UserRole", data.user.role);
           const userRole = localStorage.getItem("UserRole");
           // const userToken = localStorage.getItem("userToken");
+          window.location.href = "/"; // redirect to home page
 
           if (userRole === "admin") {
             alert("Login failed. Please check your credentials and try again.");
