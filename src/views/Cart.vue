@@ -29,7 +29,11 @@
           >
             <tr>
               <td class="align-middle">
-                <img :src="product.image" alt="" style="width: 50px" />
+                <img
+                  :src="`http://localhost:8000/${product.image}`"
+                  alt=""
+                  style="width: 50px"
+                />
               </td>
               <td>{{ product.title }}</td>
               <td class="align-middle">{{ product.price }}$</td>

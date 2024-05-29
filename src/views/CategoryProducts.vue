@@ -75,7 +75,11 @@
           >
             <div class="product-item bg-light mb-4">
               <div class="product-img position-relative overflow-hidden">
-                <img class="img-fluid w-100" :src="product.image" alt="" />
+                <img
+                  class="img-fluid w-100"
+                  :src="`http://localhost:8000/${product.image}`"
+                  alt=""
+                />
                 <div class="product-action"></div>
               </div>
               <div class="text-center py-4">
