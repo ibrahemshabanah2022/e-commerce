@@ -81,25 +81,11 @@
         >
           <div class="product-item bg-light mb-4">
             <div class="product-img position-relative overflow-hidden">
-              <img class="img-fluid w-100" :src="product.image" alt="" />
-              <!-- <div class="product-action">
-                <a
-                  v-on:click="showSwal(product)"
-                  class="btn btn-outline-dark btn-square"
-                  @click="addToCart(product)"
-                  ><i class="fa fa-shopping-cart"></i
-                ></a>
-                <a
-                  class="btn btn-outline-dark btn-square"
-                  @click="addToWishlist(product)"
-                  ><i class="far fa-heart"></i
-                ></a>
-                <a
-                  class="btn btn-outline-dark btn-square"
-                  @click="viewProduct(product.id)"
-                  ><i class="fa fa-eye"></i
-                ></a>
-              </div> -->
+              <img
+                class="img-fluid w-100"
+                :src="`http://localhost:8000/${product.image}`"
+                alt=""
+              />
             </div>
             <div class="text-center py-4">
               <a class="h6 text-decoration-none text-truncate" href="">{{
